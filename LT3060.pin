@@ -1,0 +1,53 @@
+
+ ==== Properties ====
+NAME, LT3060-tsot
+REFERENCE, IC
+PACKAGE, TSOT23-8
+LIBRARY, linear
+MINWIDTH, 250
+MINHEIGHT, 0
+ ---- END ----
+
+ ==== Options ====
+ STEPSIZE, 100
+ 
+ ---- END ----
+ 
+
+ ==== Pinlist ====
+NUM, NAME, TEXT, ELECTRICAL_TYPE, PIN_TYPE
+0, nul , 
+1, SHDN, ~SHDN~, I
+2, GND0, GND, W
+3, GND1, GND, W
+4, GND2, GND, W
+
+5, IN, IN, W
+6, OUT, OUT, W
+7, ADJ, ADJ, B
+8, REF, REF/BYP, B
+   
+ ---- END ----
+
+
+
+ ==== Arrangement ====
+NAME, ABSSPACE, RELSPACE
+SIDE, R
+nul, 200, 0
+IN, 400, 0
+SHDN, 300, 0
+
+SIDE, L
+nul, 200, 0
+OUT, 400, 0
+ADJ, 300, 0
+
+SIDE, U
+nul, 300, 0
+GND0, 100,0
+GND1,100,0
+GND2, 200,0
+REF, 300,0
+
+ ---- END ----
