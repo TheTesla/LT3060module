@@ -363,7 +363,7 @@
     )
   )
 
-  (module "DO-214AA(SMB)" (layer F.Cu) (tedit 53FE3FB9) (tstamp 53FE3942)
+  (module "DO-214AA(SMB)" (layer F.Cu) (tedit 53FE3FC9) (tstamp 53FE3942)
     (at 59.182 65.278 270)
     (descr "DO-214AA (SMB)  PACKAGE.")
     (tags "DO-214AA SMB")
@@ -372,7 +372,7 @@
     (fp_text reference D1 (at -3.048 4.572 360) (layer F.SilkS)
       (effects (font (size 1.00076 1.00076) (thickness 0.11938)))
     )
-    (fp_text value TVS (at -1.905 -4.191 270) (layer F.SilkS)
+    (fp_text value TVS (at -0.381 -3.048 270) (layer F.SilkS)
       (effects (font (size 1.00076 1.00076) (thickness 0.11938)))
     )
     (fp_line (start -0.762 0) (end -0.9652 0) (layer F.SilkS) (width 0.127))
