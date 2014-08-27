@@ -1,0 +1,7 @@
+Reference	Value	Footprint	Datasheet	Voltage	Tolerance	Digi-Key Part Number	Manufacturer Part Number	Price
+K1	CONN_3		
+C2	10nF	0603	http://www.samsungsem.com/servlet/FileDownload?type=spec&file=CL10B822KB8NNNC.pdf	50V	30%	1276-2119-1-ND	CL10B822KB8NNNC	1.000000e-001
+C3	10nF	0603	http://www.samsungsem.com/servlet/FileDownload?type=spec&file=CL10B822KB8NNNC.pdf	50V	30%	1276-2119-1-ND	CL10B822KB8NNNC	1.000000e-001
+C4	10uF	1210	http://www.samsungsem.com/servlet/FileDownload?type=spec&file=CL32B106KBJNFNE.pdf	50V	30%	1276-3386-1-ND	CL32B106KBJNFNE	1.030000e+000
+C1	1uF	0805	http://www.samsungsem.com/servlet/FileDownload?type=spec&file=CL21B105KBFNNNE.pdf	50V	30%	1276-1029-1-ND	CL21B105KBFNNNE	1.000000e-001
+IC1	LT3060-TSOT	tsot23-8	http://cds.linear.com/docs/en/datasheet/3060fb.pdf	3,3V		LT3060ETS8-3.3#TRMPBFCT-ND	LT3060ETS8-3.3#TRMPBF	

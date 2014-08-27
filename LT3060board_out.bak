@@ -29,7 +29,6 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
-LIBS:LT3060board-cache
 EELAYER 27 0
 EELAYER END
 $Descr A4 11693 8268
@@ -90,11 +89,11 @@ Connection ~ 3750 2900
 Wire Wire Line
 	4600 4100 4600 4000
 Wire Wire Line
-	4600 4000 6500 4000
+	4600 4000 6300 4000
 Wire Wire Line
-	6500 4000 6500 2500
+	6300 4000 6300 2500
 Wire Wire Line
-	6500 2500 5300 2500
+	6300 2500 5300 2500
 $Comp
 L C C2
 U 1 1 53DBB623
@@ -102,9 +101,12 @@ P 4800 3650
 F 0 "C2" H 4800 3750 40  0000 L CNN
 F 1 "10nF" H 4806 3565 40  0000 L CNN
 F 2 "0603" H 4838 3500 30  0000 C CNN
-F 3 "~" H 4800 3650 60  0001 C CNN
+F 3 "http://www.samsungsem.com/servlet/FileDownload?type=spec&file=CL10B822KB8NNNC.pdf" H 4800 3650 60  0001 C CNN
 F 4 "50V" H 4800 3650 60  0001 C CNN "Voltage"
 F 5 "30%" H 4800 3650 60  0001 C CNN "Tolerance"
+F 6 "1276-2119-1-ND" H 4800 3650 60  0001 C CNN "Digi-Key Part Number"
+F 7 "CL10B822KB8NNNC" H 4800 3650 60  0001 C CNN "Manufacturer Part Number"
+F 8 "1.000000e-001" H 4800 3650 60  0001 C CNN "Price"
 	1    4800 3650
 	1    0    0    -1  
 $EndComp
@@ -126,9 +128,12 @@ P 5550 2750
 F 0 "C3" H 5550 2850 40  0000 L CNN
 F 1 "10nF" H 5556 2665 40  0000 L CNN
 F 2 "0603" H 5588 2600 30  0000 C CNN
-F 3 "~" H 5550 2750 60  0001 C CNN
+F 3 "http://www.samsungsem.com/servlet/FileDownload?type=spec&file=CL10B822KB8NNNC.pdf" H 5550 2750 60  0001 C CNN
 F 4 "50V" H 5550 2750 60  0001 C CNN "Voltage"
 F 5 "30%" H 5550 2750 60  0001 C CNN "Tolerance"
+F 6 "1276-2119-1-ND" H 5550 2750 60  0001 C CNN "Digi-Key Part Number"
+F 7 "CL10B822KB8NNNC" H 5550 2750 60  0001 C CNN "Manufacturer Part Number"
+F 8 "1.000000e-001" H 5550 2750 60  0001 C CNN "Price"
 	1    5550 2750
 	1    0    0    -1  
 $EndComp
@@ -139,9 +144,12 @@ P 5850 2750
 F 0 "C4" H 5850 2850 40  0000 L CNN
 F 1 "10uF" H 5856 2665 40  0000 L CNN
 F 2 "1210" H 5888 2600 30  0000 C CNN
-F 3 "~" H 5850 2750 60  0001 C CNN
+F 3 "http://www.samsungsem.com/servlet/FileDownload?type=spec&file=CL32B106KBJNFNE.pdf" H 5850 2750 60  0001 C CNN
 F 4 "50V" H 5850 2750 60  0001 C CNN "Voltage"
 F 5 "30%" H 5850 2750 60  0001 C CNN "Tolerance"
+F 6 "1276-3386-1-ND" H 5850 2750 60  0001 C CNN "Digi-Key Part Number"
+F 7 "CL32B106KBJNFNE" H 5850 2750 60  0001 C CNN "Manufacturer Part Number"
+F 8 "1.030000e+000" H 5850 2750 60  0001 C CNN "Price"
 	1    5850 2750
 	1    0    0    -1  
 $EndComp
@@ -152,9 +160,12 @@ P 3550 2950
 F 0 "C1" H 3550 3050 40  0000 L CNN
 F 1 "1uF" H 3556 2865 40  0000 L CNN
 F 2 "0805" H 3588 2800 30  0000 C CNN
-F 3 "~" H 3550 2950 60  0001 C CNN
+F 3 "http://www.samsungsem.com/servlet/FileDownload?type=spec&file=CL21B105KBFNNNE.pdf" H 3550 2950 60  0001 C CNN
 F 4 "50V" H 3550 2950 60  0001 C CNN "Voltage"
 F 5 "30%" H 3550 2950 60  0001 C CNN "Tolerance"
+F 6 "1276-1029-1-ND" H 3550 2950 60  0001 C CNN "Digi-Key Part Number"
+F 7 "CL21B105KBFNNNE" H 3550 2950 60  0001 C CNN "Manufacturer Part Number"
+F 8 "1.000000e-001" H 3550 2950 60  0001 C CNN "Price"
 	1    3550 2950
 	1    0    0    -1  
 $EndComp
@@ -221,7 +232,7 @@ L PWR_FLAG #FLG06
 U 1 1 53DBCC8C
 P 3750 2450
 F 0 "#FLG06" H 3750 2545 30  0001 C CNN
-F 1 "PWR_FLAG" H 3750 2630 30  0000 C CNN
+F 1 "PWR_FLAG" H 3700 2650 30  0000 C CNN
 F 2 "" H 3750 2450 60  0000 C CNN
 F 3 "" H 3750 2450 60  0000 C CNN
 	1    3750 2450
@@ -241,7 +252,7 @@ $EndComp
 Wire Wire Line
 	4200 3600 4200 3650
 Wire Wire Line
-	3900 3650 4500 3650
+	3950 3650 4500 3650
 Connection ~ 4500 3650
 Text Label 3550 2500 0    60   ~ 0
 Vin
@@ -261,84 +272,83 @@ F 6 "LT3060ETS8-3.3#TRMPBF" H 4600 2800 60  0001 C CNN "Manufacturer Part Number
 	1    4600 2800
 	1    0    0    -1  
 $EndComp
-$Comp
-L TVS D2
-U 1 1 53FE1CF8
-P 4550 1950
-F 0 "D2" H 4500 2050 50  0000 C CNN
-F 1 "TVS" H 4500 1850 40  0000 C CNN
-F 2 "" H 4650 1950 60  0000 C CNN
-F 3 "" H 4650 1950 60  0001 C CNN
-F 4 "33" H 4550 1950 60  0001 C CNN "Breakdown Voltage"
-F 5 "1" H 4550 1950 60  0001 C CNN "Bidirectional Channels"
-F 6 "-" H 4550 1950 60  0001 C CNN "Unidirectional Channels"
-	1    4550 1950
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
-	3850 2500 3850 2350
+	3950 3000 3950 2950
 Wire Wire Line
-	3850 2350 4000 2350
+	3950 2950 3750 2950
+Connection ~ 3750 2950
 Wire Wire Line
-	4000 2350 4000 1950
-Wire Wire Line
-	4000 1950 4300 1950
-Connection ~ 3850 2500
-Wire Wire Line
-	4800 1950 5350 1950
-Wire Wire Line
-	5350 1950 5350 2500
-Connection ~ 5350 2500
-$Comp
-L TVS D1
-U 1 1 53FE1D92
-P 3900 3250
-F 0 "D1" H 3850 3350 50  0000 C CNN
-F 1 "TVS" H 3850 3150 40  0000 C CNN
-F 2 "" H 4000 3250 60  0000 C CNN
-F 3 "" H 4000 3250 60  0001 C CNN
-F 4 "33" H 3900 3250 60  0001 C CNN "Breakdown Voltage"
-F 5 "1" H 3900 3250 60  0001 C CNN "Bidirectional Channels"
-F 6 "-" H 3900 3250 60  0001 C CNN "Unidirectional Channels"
-	1    3900 3250
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	3900 3000 3750 3000
-Connection ~ 3750 3000
-Wire Wire Line
-	3900 3500 3900 3650
+	3950 3500 3950 3650
 Connection ~ 4200 3650
+Wire Wire Line
+	4850 2100 5400 2100
+Wire Wire Line
+	5400 2100 5400 2500
+Connection ~ 5400 2500
+Wire Wire Line
+	4350 2100 3850 2100
+Wire Wire Line
+	3850 2100 3850 2500
+Connection ~ 3850 2500
 $Comp
-L TVS D3
-U 1 1 53FE1E08
-P 6250 2800
-F 0 "D3" H 6200 2900 50  0000 C CNN
-F 1 "TVS" H 6200 2700 40  0000 C CNN
-F 2 "" H 6350 2800 60  0000 C CNN
-F 3 "" H 6350 2800 60  0001 C CNN
-F 4 "33" H 6250 2800 60  0001 C CNN "Breakdown Voltage"
-F 5 "1" H 6250 2800 60  0001 C CNN "Bidirectional Channels"
-F 6 "-" H 6250 2800 60  0001 C CNN "Unidirectional Channels"
-	1    6250 2800
-	0    -1   -1   0   
+L TVS D?
+U 1 1 53FCE251
+P 6150 2800
+F 0 "D?" H 6100 2900 50  0000 C CNN
+F 1 "TVS" H 6100 2700 40  0000 C CNN
+F 2 "" H 6250 2800 60  0000 C CNN
+F 3 "" H 6250 2800 60  0000 C CNN
+F 4 "45" H 6150 2800 60  0001 C CNN "Breakdown Voltage"
+F 5 "400" H 6150 2800 60  0001 C CNN "Peak Pulse Power"
+F 6 "1" H 6150 2800 60  0001 C CNN "Bidirectional Channels"
+F 7 "-" H 6150 2800 60  0001 C CNN "Unidirectional Channels"
+	1    6150 2800
+	0    1    1    0   
 $EndComp
 Wire Wire Line
-	6250 2550 6250 2500
-Wire Wire Line
-	6250 2500 6300 2500
-Connection ~ 6300 2500
+	6150 2550 6150 2500
+Connection ~ 6150 2500
 $Comp
-L GND #PWR08
-U 1 1 53FE1E4A
-P 6250 3150
-F 0 "#PWR08" H 6250 3150 30  0001 C CNN
-F 1 "GND" H 6250 3080 30  0001 C CNN
-F 2 "" H 6250 3150 60  0000 C CNN
-F 3 "" H 6250 3150 60  0000 C CNN
-	1    6250 3150
+L GND #PWR?
+U 1 1 53FCE2E8
+P 6150 3100
+F 0 "#PWR?" H 6150 3100 30  0001 C CNN
+F 1 "GND" H 6150 3030 30  0001 C CNN
+F 2 "" H 6150 3100 60  0000 C CNN
+F 3 "" H 6150 3100 60  0000 C CNN
+	1    6150 3100
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	6250 3050 6250 3150
+	6150 3100 6150 3050
+$Comp
+L TVS D?
+U 1 1 53FE1C38
+P 4600 2100
+F 0 "D?" H 4550 2200 50  0000 C CNN
+F 1 "TVS" H 4550 2000 40  0000 C CNN
+F 2 "" H 4700 2100 60  0000 C CNN
+F 3 "" H 4700 2100 60  0000 C CNN
+F 4 "45" H 4600 2100 60  0001 C CNN "Breakdown Voltage"
+F 5 "400" H 4600 2100 60  0001 C CNN "Peak Pulse Power"
+F 6 "1" H 4600 2100 60  0001 C CNN "Bidirectional Channels"
+F 7 "-" H 4600 2100 60  0001 C CNN "Unidirectional Channels"
+	1    4600 2100
+	-1   0    0    1   
+$EndComp
+$Comp
+L TVS D?
+U 1 1 53FE1C54
+P 3950 3250
+F 0 "D?" H 3900 3350 50  0000 C CNN
+F 1 "TVS" H 3900 3150 40  0000 C CNN
+F 2 "" H 4050 3250 60  0000 C CNN
+F 3 "" H 4050 3250 60  0000 C CNN
+F 4 "45" H 3950 3250 60  0001 C CNN "Breakdown Voltage"
+F 5 "400" H 3950 3250 60  0001 C CNN "Peak Pulse Power"
+F 6 "1" H 3950 3250 60  0001 C CNN "Bidirectional Channels"
+F 7 "-" H 3950 3250 60  0001 C CNN "Unidirectional Channels"
+	1    3950 3250
+	0    1    1    0   
+$EndComp
 $EndSCHEMATC
