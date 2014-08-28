@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 27.08.2014 20:09:27
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 28.08.2014 00:00:23
 
 BeginCmp
 TimeStamp = /53DBB64E;
@@ -29,24 +29,17 @@ IdModule  = SM1210;
 EndCmp
 
 BeginCmp
-TimeStamp = /53FE1D92;
+TimeStamp = /53FE53A3;
 Reference = D1;
-ValeurCmp = TVS;
-IdModule  = DO-214AA(SMB);
+ValeurCmp = TVSCOMA;
+IdModule  = SOT23;
 EndCmp
 
 BeginCmp
-TimeStamp = /53FE1CF8;
+TimeStamp = /53FE54F9;
 Reference = D2;
-ValeurCmp = TVS;
-IdModule  = DO-214AA(SMB);
-EndCmp
-
-BeginCmp
-TimeStamp = /53FE1E08;
-Reference = D3;
-ValeurCmp = TVS;
-IdModule  = DO-214AA(SMB);
+ValeurCmp = TVSCOMA;
+IdModule  = SOT23;
 EndCmp
 
 BeginCmp

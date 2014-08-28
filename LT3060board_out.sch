@@ -93,8 +93,6 @@ Wire Wire Line
 	4600 4000 6500 4000
 Wire Wire Line
 	6500 4000 6500 2500
-Wire Wire Line
-	6500 2500 5300 2500
 $Comp
 L C C2
 U 1 1 53DBB623
@@ -252,8 +250,6 @@ F 3 "" H 4200 3600 60  0000 C CNN
 $EndComp
 Wire Wire Line
 	4200 3600 4200 3650
-Wire Wire Line
-	3900 3650 4500 3650
 Connection ~ 4500 3650
 Text Label 3550 2500 0    60   ~ 0
 Vin
@@ -273,93 +269,88 @@ F 6 "LT3060ETS8-3.3#TRMPBF" H 4600 2800 60  0001 C CNN "Manufacturer Part Number
 	1    4600 2800
 	1    0    0    -1  
 $EndComp
-$Comp
-L TVS D2
-U 1 1 53FE1CF8
-P 4550 1950
-F 0 "D2" H 4500 2050 50  0000 C CNN
-F 1 "TVS" H 4500 1850 40  0000 C CNN
-F 2 "" H 4650 1950 60  0000 C CNN
-F 3 "http://www.littelfuse.com/~/media/electronics/datasheets/tvs_diodes/littelfuse_tvs_diode_smdj_datasheet.pdf.pdf" H 4650 1950 60 0001 C CNN ""
-F 4 "33" H 4550 1950 60  0001 C CNN "Breakdown Voltage"
-F 5 "1" H 4550 1950 60  0001 C CNN "Bidirectional Channels"
-F 6 "-" H 4550 1950 60  0001 C CNN "Unidirectional Channels"
-F 7 "SMDJ30CACT-ND" H 4550 1950 60 0001 C CNN "Digi-Key Part Number"
-F 8 "SMDJ30CA" H 4550 1950 60 0001 C CNN "Manufacturer Part Number"
-F 9 "1.290000e+000" H 4550 1950 60 0001 C CNN "Price"
-	1    4550 1950
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	3850 2500 3850 2350
 Wire Wire Line
 	3850 2350 4000 2350
 Wire Wire Line
-	4000 2350 4000 1950
+	4000 2350 4000 1800
 Wire Wire Line
-	4000 1950 4300 1950
+	4000 1800 4350 1800
 Connection ~ 3850 2500
 Wire Wire Line
-	4800 1950 5350 1950
-Wire Wire Line
-	5350 1950 5350 2500
+	5350 1800 5350 2500
 Connection ~ 5350 2500
-$Comp
-L TVS D1
-U 1 1 53FE1D92
-P 3900 3250
-F 0 "D1" H 3850 3350 50  0000 C CNN
-F 1 "TVS" H 3850 3150 40  0000 C CNN
-F 2 "" H 4000 3250 60  0000 C CNN
-F 3 "http://www.littelfuse.com/~/media/electronics/datasheets/tvs_diodes/littelfuse_tvs_diode_smdj_datasheet.pdf.pdf" H 4000 3250 60 0001 C CNN ""
-F 4 "33" H 3900 3250 60  0001 C CNN "Breakdown Voltage"
-F 5 "1" H 3900 3250 60  0001 C CNN "Bidirectional Channels"
-F 6 "-" H 3900 3250 60  0001 C CNN "Unidirectional Channels"
-F 7 "SMDJ30CACT-ND" H 3900 3250 60 0001 C CNN "Digi-Key Part Number"
-F 8 "SMDJ30CA" H 3900 3250 60 0001 C CNN "Manufacturer Part Number"
-F 9 "1.290000e+000" H 3900 3250 60 0001 C CNN "Price"
-	1    3900 3250
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	3900 3000 3750 3000
-Connection ~ 3750 3000
-Wire Wire Line
-	3900 3500 3900 3650
-Connection ~ 4200 3650
-$Comp
-L TVS D3
-U 1 1 53FE1E08
-P 6250 2800
-F 0 "D3" H 6200 2900 50  0000 C CNN
-F 1 "TVS" H 6200 2700 40  0000 C CNN
-F 2 "" H 6350 2800 60  0000 C CNN
-F 3 "http://www.littelfuse.com/~/media/electronics/datasheets/tvs_diodes/littelfuse_tvs_diode_smdj_datasheet.pdf.pdf" H 6350 2800 60 0001 C CNN ""
-F 4 "33" H 6250 2800 60  0001 C CNN "Breakdown Voltage"
-F 5 "1" H 6250 2800 60  0001 C CNN "Bidirectional Channels"
-F 6 "-" H 6250 2800 60  0001 C CNN "Unidirectional Channels"
-F 7 "SMDJ30CACT-ND" H 6250 2800 60 0001 C CNN "Digi-Key Part Number"
-F 8 "SMDJ30CA" H 6250 2800 60 0001 C CNN "Manufacturer Part Number"
-F 9 "1.290000e+000" H 6250 2800 60 0001 C CNN "Price"
-	1    6250 2800
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	6250 2550 6250 2500
-Wire Wire Line
-	6250 2500 6300 2500
-Connection ~ 6300 2500
 $Comp
 L GND #PWR08
 U 1 1 53FE1E4A
-P 6250 3150
-F 0 "#PWR08" H 6250 3150 30  0001 C CNN
-F 1 "GND" H 6250 3080 30  0001 C CNN
-F 2 "" H 6250 3150 60  0000 C CNN
-F 3 "" H 6250 3150 60  0000 C CNN
-	1    6250 3150
+P 4250 2200
+F 0 "#PWR08" H 4250 2200 30  0001 C CNN
+F 1 "GND" H 4250 2130 30  0001 C CNN
+F 2 "" H 4250 2200 60  0000 C CNN
+F 3 "" H 4250 2200 60  0000 C CNN
+	1    4250 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L TVSCOMA D1
+U 1 1 53FE53A3
+P 4650 1800
+F 0 "D1" H 4650 1900 50  0000 C CNN
+F 1 "TVS" H 4800 1700 40  0000 C CNN
+F 2 "~" H 4750 1800 60  0000 C CNN
+F 3 "http://www.littelfuse.com/~/media/electronics/datasheets/tvs_diode_arrays/littelfuse_tvs_diode_array_sm_datasheet.pdf.pdf" H 4750 1800 60 0001 C CNN ""
+F 4 "36" H 4650 1800 60  0001 C CNN "Reverse Standoff Voltage"
+F 5 "-" H 4650 1800 60  0001 C CNN "Bidirectional Channels"
+F 6 "2" H 4650 1800 60  0001 C CNN "Unidirectional Channels"
+F 7 "F6350CT-ND" H 4650 1800 60 0001 C CNN "Digi-Key Part Number"
+F 8 "SM36-02HTG" H 4650 1800 60 0001 C CNN "Manufacturer Part Number"
+F 9 "5.900000e-001" H 4650 1800 60 0001 C CNN "Price"
+	1    4650 1800
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	6250 3050 6250 3150
+	6500 2500 5300 2500
+$Comp
+L TVSCOMA D2
+U 1 1 53FE54F9
+P 4650 2150
+F 0 "D2" H 4650 2250 50  0000 C CNN
+F 1 "TVS" H 4800 2050 40  0000 C CNN
+F 2 "~" H 4750 2150 60  0000 C CNN
+F 3 "http://www.littelfuse.com/~/media/electronics/datasheets/tvs_diode_arrays/littelfuse_tvs_diode_array_sm_datasheet.pdf.pdf" H 4750 2150 60 0001 C CNN ""
+F 4 "36" H 4650 2150 60  0001 C CNN "Reverse Standoff Voltage"
+F 5 "-" H 4650 2150 60  0001 C CNN "Bidirectional Channels"
+F 6 "2" H 4650 2150 60  0001 C CNN "Unidirectional Channels"
+F 7 "F6350CT-ND" H 4650 2150 60 0001 C CNN "Digi-Key Part Number"
+F 8 "SM36-02HTG" H 4650 2150 60 0001 C CNN "Manufacturer Part Number"
+F 9 "5.900000e-001" H 4650 2150 60 0001 C CNN "Price"
+	1    4650 2150
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4650 2000 4650 1950
+Wire Wire Line
+	4950 1800 5350 1800
+Wire Wire Line
+	4350 2150 4250 2150
+Wire Wire Line
+	4250 2150 4250 2200
+$Comp
+L GND #PWR09
+U 1 1 53FE55ED
+P 5050 2200
+F 0 "#PWR09" H 5050 2200 30  0001 C CNN
+F 1 "GND" H 5050 2130 30  0001 C CNN
+F 2 "" H 5050 2200 60  0000 C CNN
+F 3 "" H 5050 2200 60  0000 C CNN
+	1    5050 2200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5050 2200 5050 2150
+Wire Wire Line
+	5050 2150 4950 2150
+Wire Wire Line
+	4200 3650 4500 3650
 $EndSCHEMATC
