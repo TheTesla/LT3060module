@@ -1,6 +1,5 @@
 EESchema Schematic File Version 2
 LIBS:power
-LIBS:device
 LIBS:transistors
 LIBS:conn
 LIBS:linear
@@ -29,6 +28,7 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
+LIBS:device
 LIBS:LT3060board-cache
 EELAYER 27 0
 EELAYER END
@@ -36,7 +36,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title ""
-Date "27 aug 2014"
+Date "24 may 2015"
 Rev ""
 Comp ""
 Comment1 ""
@@ -100,11 +100,11 @@ P 4800 3650
 F 0 "C2" H 4800 3750 40  0000 L CNN
 F 1 "10nF" H 4806 3565 40  0000 L CNN
 F 2 "0603" H 4838 3500 30  0000 C CNN
-F 3 "http://www.samsungsem.com/servlet/FileDownload?type=spec&file=CL10B822KB8NNNC.pdf" H 4800 3650 60 0001 C CNN ""
+F 3 "http://www.samsungsem.com/servlet/FileDownload?type=spec&file=CL10B103KB8NNNC.pdf" H 4800 3650 60 0001 C CNN ""
 F 4 "50V" H 4800 3650 60  0001 C CNN "Voltage"
-F 5 "30%" H 4800 3650 60  0001 C CNN "Tolerance"
-F 6 "1276-2119-1-ND" H 4800 3650 60 0001 C CNN "Digi-Key Part Number"
-F 7 "CL10B822KB8NNNC" H 4800 3650 60 0001 C CNN "Manufacturer Part Number"
+F 5 "21%" H 4800 3650 60  0001 C CNN "Tolerance"
+F 6 "1276-1009-1-ND" H 4800 3650 60 0001 C CNN "Digi-Key Part Number"
+F 7 "CL10B103KB8NNNC" H 4800 3650 60 0001 C CNN "Manufacturer Part Number"
 F 8 "1.000000e-001" H 4800 3650 60 0001 C CNN "Price"
 	1    4800 3650
 	1    0    0    -1  
@@ -127,11 +127,11 @@ P 5550 2750
 F 0 "C3" H 5550 2850 40  0000 L CNN
 F 1 "10nF" H 5556 2665 40  0000 L CNN
 F 2 "0603" H 5588 2600 30  0000 C CNN
-F 3 "http://www.samsungsem.com/servlet/FileDownload?type=spec&file=CL10B822KB8NNNC.pdf" H 5550 2750 60 0001 C CNN ""
+F 3 "http://www.samsungsem.com/servlet/FileDownload?type=spec&file=CL10B103KB8NNNC.pdf" H 5550 2750 60 0001 C CNN ""
 F 4 "50V" H 5550 2750 60  0001 C CNN "Voltage"
-F 5 "30%" H 5550 2750 60  0001 C CNN "Tolerance"
-F 6 "1276-2119-1-ND" H 5550 2750 60 0001 C CNN "Digi-Key Part Number"
-F 7 "CL10B822KB8NNNC" H 5550 2750 60 0001 C CNN "Manufacturer Part Number"
+F 5 "21%" H 5550 2750 60  0001 C CNN "Tolerance"
+F 6 "1276-1009-1-ND" H 5550 2750 60 0001 C CNN "Digi-Key Part Number"
+F 7 "CL10B103KB8NNNC" H 5550 2750 60 0001 C CNN "Manufacturer Part Number"
 F 8 "1.000000e-001" H 5550 2750 60 0001 C CNN "Price"
 	1    5550 2750
 	1    0    0    -1  
@@ -145,7 +145,7 @@ F 1 "10uF" H 5856 2665 40  0000 L CNN
 F 2 "1210" H 5888 2600 30  0000 C CNN
 F 3 "http://www.samsungsem.com/servlet/FileDownload?type=spec&file=CL32B106KBJNFNE.pdf" H 5850 2750 60 0001 C CNN ""
 F 4 "50V" H 5850 2750 60  0001 C CNN "Voltage"
-F 5 "30%" H 5850 2750 60  0001 C CNN "Tolerance"
+F 5 "21%" H 5850 2750 60  0001 C CNN "Tolerance"
 F 6 "1276-3386-1-ND" H 5850 2750 60 0001 C CNN "Digi-Key Part Number"
 F 7 "CL32B106KBJNFNE" H 5850 2750 60 0001 C CNN "Manufacturer Part Number"
 F 8 "1.030000e+000" H 5850 2750 60 0001 C CNN "Price"
@@ -161,7 +161,7 @@ F 1 "1uF" H 3556 2865 40  0000 L CNN
 F 2 "0805" H 3588 2800 30  0000 C CNN
 F 3 "http://www.samsungsem.com/servlet/FileDownload?type=spec&file=CL21B105KBFNNNE.pdf" H 3550 2950 60 0001 C CNN ""
 F 4 "50V" H 3550 2950 60  0001 C CNN "Voltage"
-F 5 "30%" H 3550 2950 60  0001 C CNN "Tolerance"
+F 5 "21%" H 3550 2950 60  0001 C CNN "Tolerance"
 F 6 "1276-1029-1-ND" H 3550 2950 60 0001 C CNN "Digi-Key Part Number"
 F 7 "CL21B105KBFNNNE" H 3550 2950 60 0001 C CNN "Manufacturer Part Number"
 F 8 "1.000000e-001" H 3550 2950 60 0001 C CNN "Price"
@@ -297,7 +297,7 @@ L TVSCOMA D1
 U 1 1 53FE53A3
 P 4650 1800
 F 0 "D1" H 4650 1900 50  0000 C CNN
-F 1 "TVS" H 4800 1700 40  0000 C CNN
+F 1 "TVScomA" H 4800 1700 40  0000 C CNN
 F 2 "~" H 4750 1800 60  0000 C CNN
 F 3 "http://www.littelfuse.com/~/media/electronics/datasheets/tvs_diode_arrays/littelfuse_tvs_diode_array_sm_datasheet.pdf.pdf" H 4750 1800 60 0001 C CNN ""
 F 4 "36" H 4650 1800 60  0001 C CNN "Reverse Standoff Voltage"
@@ -316,7 +316,7 @@ L TVSCOMA D2
 U 1 1 53FE54F9
 P 4650 2150
 F 0 "D2" H 4650 2250 50  0000 C CNN
-F 1 "TVS" H 4800 2050 40  0000 C CNN
+F 1 "TVScomA" H 4800 2050 40  0000 C CNN
 F 2 "~" H 4750 2150 60  0000 C CNN
 F 3 "http://www.littelfuse.com/~/media/electronics/datasheets/tvs_diode_arrays/littelfuse_tvs_diode_array_sm_datasheet.pdf.pdf" H 4750 2150 60 0001 C CNN ""
 F 4 "36" H 4650 2150 60  0001 C CNN "Reverse Standoff Voltage"

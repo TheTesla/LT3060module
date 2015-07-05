@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>C:/Unternehmen/Produkte/LT3060board/LT3060board_out.sch</source>
-    <date>25.05.2015 01:05:13</date>
+    <date>24.05.2015 23:50:51</date>
     <tool>eeschema (2013-07-07 BZR 4022)-stable</tool>
   </design>
   <components>
@@ -15,12 +15,12 @@
     <comp ref="C2">
       <value>10nF</value>
       <footprint>0603</footprint>
-      <datasheet>http://www.samsungsem.com/servlet/FileDownload?type=spec&amp;file=CL10B103KB8NNNC.pdf</datasheet>
+      <datasheet>http://www.samsungsem.com/servlet/FileDownload?type=spec&amp;file=CL10B822KB8NNNC.pdf</datasheet>
       <fields>
         <field name="Voltage">50V</field>
-        <field name="Tolerance">21%</field>
-        <field name="Digi-Key Part Number">1276-1009-1-ND</field>
-        <field name="Manufacturer Part Number">CL10B103KB8NNNC</field>
+        <field name="Tolerance">30%</field>
+        <field name="Digi-Key Part Number">1276-2119-1-ND</field>
+        <field name="Manufacturer Part Number">CL10B822KB8NNNC</field>
         <field name="Price">1.000000e-001</field>
       </fields>
       <libsource lib="device" part="C"/>
@@ -30,12 +30,12 @@
     <comp ref="C3">
       <value>10nF</value>
       <footprint>0603</footprint>
-      <datasheet>http://www.samsungsem.com/servlet/FileDownload?type=spec&amp;file=CL10B103KB8NNNC.pdf</datasheet>
+      <datasheet>http://www.samsungsem.com/servlet/FileDownload?type=spec&amp;file=CL10B822KB8NNNC.pdf</datasheet>
       <fields>
         <field name="Voltage">50V</field>
-        <field name="Tolerance">21%</field>
-        <field name="Digi-Key Part Number">1276-1009-1-ND</field>
-        <field name="Manufacturer Part Number">CL10B103KB8NNNC</field>
+        <field name="Tolerance">30%</field>
+        <field name="Digi-Key Part Number">1276-2119-1-ND</field>
+        <field name="Manufacturer Part Number">CL10B822KB8NNNC</field>
         <field name="Price">1.000000e-001</field>
       </fields>
       <libsource lib="device" part="C"/>
@@ -48,7 +48,7 @@
       <datasheet>http://www.samsungsem.com/servlet/FileDownload?type=spec&amp;file=CL32B106KBJNFNE.pdf</datasheet>
       <fields>
         <field name="Voltage">50V</field>
-        <field name="Tolerance">21%</field>
+        <field name="Tolerance">30%</field>
         <field name="Digi-Key Part Number">1276-3386-1-ND</field>
         <field name="Manufacturer Part Number">CL32B106KBJNFNE</field>
         <field name="Price">1.030000e+000</field>
@@ -63,7 +63,7 @@
       <datasheet>http://www.samsungsem.com/servlet/FileDownload?type=spec&amp;file=CL21B105KBFNNNE.pdf</datasheet>
       <fields>
         <field name="Voltage">50V</field>
-        <field name="Tolerance">21%</field>
+        <field name="Tolerance">30%</field>
         <field name="Digi-Key Part Number">1276-1029-1-ND</field>
         <field name="Manufacturer Part Number">CL21B105KBFNNNE</field>
         <field name="Price">1.000000e-001</field>
@@ -86,7 +86,7 @@
       <tstamp>53DBE0F4</tstamp>
     </comp>
     <comp ref="D1">
-      <value>TVScomA</value>
+      <value>TVS</value>
       <datasheet>http://www.littelfuse.com/~/media/electronics/datasheets/tvs_diode_arrays/littelfuse_tvs_diode_array_sm_datasheet.pdf.pdf</datasheet>
       <fields>
         <field name="Reverse Standoff Voltage">36</field>
@@ -101,7 +101,7 @@
       <tstamp>53FE53A3</tstamp>
     </comp>
     <comp ref="D2">
-      <value>TVScomA</value>
+      <value>TVS</value>
       <datasheet>http://www.littelfuse.com/~/media/electronics/datasheets/tvs_diode_arrays/littelfuse_tvs_diode_array_sm_datasheet.pdf.pdf</datasheet>
       <fields>
         <field name="Reverse Standoff Voltage">36</field>
