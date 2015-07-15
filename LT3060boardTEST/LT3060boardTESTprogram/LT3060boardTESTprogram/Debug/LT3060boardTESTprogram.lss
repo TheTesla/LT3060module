@@ -3,27 +3,27 @@ LT3060boardTESTprogram.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000009da  00000000  00000000  00000074  2**1
+  0 .text         00000a40  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .bss          00000017  00800100  00800100  00000a4e  2**0
+  1 .bss          0000001b  00800100  00800100  00000ab4  2**0
                   ALLOC
-  2 .comment      00000030  00000000  00000000  00000a4e  2**0
+  2 .comment      00000030  00000000  00000000  00000ab4  2**0
                   CONTENTS, READONLY
-  3 .debug_aranges 00000068  00000000  00000000  00000a7e  2**0
+  3 .debug_aranges 00000070  00000000  00000000  00000ae4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .debug_info   000005e9  00000000  00000000  00000ae6  2**0
+  4 .debug_info   0000066f  00000000  00000000  00000b54  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_abbrev 000001b9  00000000  00000000  000010cf  2**0
+  5 .debug_abbrev 000001b9  00000000  00000000  000011c3  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_line   000002e1  00000000  00000000  00001288  2**0
+  6 .debug_line   00000304  00000000  00000000  0000137c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_frame  0000019c  00000000  00000000  0000156c  2**2
+  7 .debug_frame  000001ac  00000000  00000000  00001680  2**2
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_str    0000034d  00000000  00000000  00001708  2**0
+  8 .debug_str    0000039b  00000000  00000000  0000182c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_loc    00000946  00000000  00000000  00001a55  2**0
+  9 .debug_loc    000009fa  00000000  00000000  00001bc7  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_ranges 00000070  00000000  00000000  0000239b  2**0
+ 10 .debug_ranges 00000078  00000000  00000000  000025c1  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -74,17 +74,17 @@ Disassembly of section .text:
   48:	1d 92       	st	X+, r1
 
 0000004a <.do_clear_bss_start>:
-  4a:	a7 31       	cpi	r26, 0x17	; 23
+  4a:	ab 31       	cpi	r26, 0x1B	; 27
   4c:	b2 07       	cpc	r27, r18
   4e:	e1 f7       	brne	.-8      	; 0x48 <.do_clear_bss_loop>
-  50:	8c d2       	rcall	.+1304   	; 0x56a <main>
-  52:	c1 c4       	rjmp	.+2434   	; 0x9d6 <_exit>
+  50:	a1 d2       	rcall	.+1346   	; 0x594 <main>
+  52:	f4 c4       	rjmp	.+2536   	; 0xa3c <_exit>
 
 00000054 <__bad_interrupt>:
   54:	d5 cf       	rjmp	.-86     	; 0x0 <__vectors>
 
 00000056 <_Z7ADC2LEDi>:
-uint16_t leds_tmp, leds_capi, leds_capo, leds_zi, leds_zo, leds_zio, leds_zg, leds_v;
+uint16_t leds_tmp, leds_capi, leds_capo, leds_zi, leds_zo, leds_zio, leds_zg, leds_v, leds_brd, leds_brd_su, leds_oc;
 
 uint8_t ADC2LED(int16_t adc)
 {
@@ -115,7 +115,7 @@ uint8_t ADC2LED(int16_t adc)
   78:	5c f4       	brge	.+22     	; 0x90 <_Z7ADC2LEDi+0x3a>
   7a:	20 e0       	ldi	r18, 0x00	; 0
   7c:	09 c0       	rjmp	.+18     	; 0x90 <_Z7ADC2LEDi+0x3a>
-uint16_t leds_tmp, leds_capi, leds_capo, leds_zi, leds_zo, leds_zio, leds_zg, leds_v;
+uint16_t leds_tmp, leds_capi, leds_capo, leds_zi, leds_zo, leds_zio, leds_zg, leds_v, leds_brd, leds_brd_su, leds_oc;
 
 uint8_t ADC2LED(int16_t adc)
 {
@@ -166,7 +166,7 @@ ISR (TIMER0_OVF_vect)
 	uint8_t mask = 0;
 	
 	if(1 == led_row >> 6){
-  b2:	80 91 14 01 	lds	r24, 0x0114
+  b2:	80 91 18 01 	lds	r24, 0x0118
   b6:	90 e0       	ldi	r25, 0x00	; 0
   b8:	08 2e       	mov	r0, r24
   ba:	89 2f       	mov	r24, r25
@@ -181,8 +181,8 @@ ISR (TIMER0_OVF_vect)
   cc:	99 f4       	brne	.+38     	; 0xf4 <__vector_16+0x60>
 		// line 0
 		if(leds & (1 << 13)){
-  ce:	80 91 15 01 	lds	r24, 0x0115
-  d2:	90 91 16 01 	lds	r25, 0x0116
+  ce:	80 91 19 01 	lds	r24, 0x0119
+  d2:	90 91 1a 01 	lds	r25, 0x011A
   d6:	95 fd       	sbrc	r25, 5
   d8:	02 c0       	rjmp	.+4      	; 0xde <__vector_16+0x4a>
 
@@ -220,15 +220,15 @@ ISR (TIMER0_OVF_vect)
 		DDRB = 1 | mask;
   ee:	21 60       	ori	r18, 0x01	; 1
   f0:	24 b9       	out	0x04, r18	; 4
-  f2:	12 c1       	rjmp	.+548    	; 0x318 <__stack+0x19>
+  f2:	27 c1       	rjmp	.+590    	; 0x342 <__stack+0x43>
 	} else if (2 == led_row >> 6){
   f4:	82 30       	cpi	r24, 0x02	; 2
   f6:	91 05       	cpc	r25, r1
   f8:	81 f4       	brne	.+32     	; 0x11a <__vector_16+0x86>
 		// line 1
 		if(leds & (1 << 0)){
-  fa:	80 91 15 01 	lds	r24, 0x0115
-  fe:	90 91 16 01 	lds	r25, 0x0116
+  fa:	80 91 19 01 	lds	r24, 0x0119
+  fe:	90 91 1a 01 	lds	r25, 0x011A
  102:	28 2f       	mov	r18, r24
  104:	21 70       	andi	r18, 0x01	; 1
 			mask |= (1 << 0);
@@ -253,14 +253,14 @@ ISR (TIMER0_OVF_vect)
 		DDRB = 2 | mask;  
  114:	22 60       	ori	r18, 0x02	; 2
  116:	24 b9       	out	0x04, r18	; 4
- 118:	ff c0       	rjmp	.+510    	; 0x318 <__stack+0x19>
+ 118:	14 c1       	rjmp	.+552    	; 0x342 <__stack+0x43>
 	}else if (3 == led_row >> 6){
  11a:	03 97       	sbiw	r24, 0x03	; 3
  11c:	a1 f4       	brne	.+40     	; 0x146 <__vector_16+0xb2>
 		// line 2
 		if(leds & (1 << 3)){
- 11e:	80 91 15 01 	lds	r24, 0x0115
- 122:	90 91 16 01 	lds	r25, 0x0116
+ 11e:	80 91 19 01 	lds	r24, 0x0119
+ 122:	90 91 1a 01 	lds	r25, 0x011A
  126:	83 fd       	sbrc	r24, 3
  128:	02 c0       	rjmp	.+4      	; 0x12e <__vector_16+0x9a>
 
@@ -300,12 +300,12 @@ ISR (TIMER0_OVF_vect)
 		DDRB = 4 | mask;
  140:	24 60       	ori	r18, 0x04	; 4
  142:	24 b9       	out	0x04, r18	; 4
- 144:	e9 c0       	rjmp	.+466    	; 0x318 <__stack+0x19>
+ 144:	fe c0       	rjmp	.+508    	; 0x342 <__stack+0x43>
 	} else {
 		// line 3
 		if(leds & (1 << 8)){
- 146:	80 91 15 01 	lds	r24, 0x0115
- 14a:	90 91 16 01 	lds	r25, 0x0116
+ 146:	80 91 19 01 	lds	r24, 0x0119
+ 14a:	90 91 1a 01 	lds	r25, 0x011A
  14e:	90 fd       	sbrc	r25, 0
  150:	02 c0       	rjmp	.+4      	; 0x156 <__vector_16+0xc2>
 
@@ -346,1335 +346,1396 @@ ISR (TIMER0_OVF_vect)
  168:	24 b9       	out	0x04, r18	; 4
 		
 		x++;
- 16a:	40 91 10 01 	lds	r20, 0x0110
- 16e:	50 91 11 01 	lds	r21, 0x0111
- 172:	60 91 12 01 	lds	r22, 0x0112
- 176:	70 91 13 01 	lds	r23, 0x0113
- 17a:	4f 5f       	subi	r20, 0xFF	; 255
- 17c:	5f 4f       	sbci	r21, 0xFF	; 255
- 17e:	6f 4f       	sbci	r22, 0xFF	; 255
- 180:	7f 4f       	sbci	r23, 0xFF	; 255
- 182:	40 93 10 01 	sts	0x0110, r20
- 186:	50 93 11 01 	sts	0x0111, r21
- 18a:	60 93 12 01 	sts	0x0112, r22
- 18e:	70 93 13 01 	sts	0x0113, r23
-		
-		if(0 == ((x >> 12) & 7)) if(leds_capi) leds = leds_capi;
- 192:	db 01       	movw	r26, r22
- 194:	ca 01       	movw	r24, r20
- 196:	07 2e       	mov	r0, r23
- 198:	7c e0       	ldi	r23, 0x0C	; 12
- 19a:	b6 95       	lsr	r27
- 19c:	a7 95       	ror	r26
- 19e:	97 95       	ror	r25
- 1a0:	87 95       	ror	r24
- 1a2:	7a 95       	dec	r23
- 1a4:	d1 f7       	brne	.-12     	; 0x19a <__vector_16+0x106>
- 1a6:	70 2d       	mov	r23, r0
- 1a8:	87 70       	andi	r24, 0x07	; 7
- 1aa:	99 27       	eor	r25, r25
- 1ac:	aa 27       	eor	r26, r26
- 1ae:	bb 27       	eor	r27, r27
- 1b0:	00 97       	sbiw	r24, 0x00	; 0
- 1b2:	a1 05       	cpc	r26, r1
- 1b4:	b1 05       	cpc	r27, r1
- 1b6:	61 f4       	brne	.+24     	; 0x1d0 <__vector_16+0x13c>
- 1b8:	20 91 0c 01 	lds	r18, 0x010C
- 1bc:	30 91 0d 01 	lds	r19, 0x010D
- 1c0:	21 15       	cp	r18, r1
- 1c2:	31 05       	cpc	r19, r1
- 1c4:	39 f1       	breq	.+78     	; 0x214 <__vector_16+0x180>
- 1c6:	30 93 16 01 	sts	0x0116, r19
- 1ca:	20 93 15 01 	sts	0x0115, r18
- 1ce:	22 c0       	rjmp	.+68     	; 0x214 <__vector_16+0x180>
-		if(1 == ((x >> 12) & 7)) if(leds_zi) leds = leds_zi;
- 1d0:	81 30       	cpi	r24, 0x01	; 1
- 1d2:	91 05       	cpc	r25, r1
- 1d4:	a1 05       	cpc	r26, r1
- 1d6:	b1 05       	cpc	r27, r1
- 1d8:	61 f4       	brne	.+24     	; 0x1f2 <__vector_16+0x15e>
- 1da:	20 91 08 01 	lds	r18, 0x0108
- 1de:	30 91 09 01 	lds	r19, 0x0109
- 1e2:	21 15       	cp	r18, r1
- 1e4:	31 05       	cpc	r19, r1
- 1e6:	31 f1       	breq	.+76     	; 0x234 <__vector_16+0x1a0>
- 1e8:	30 93 16 01 	sts	0x0116, r19
- 1ec:	20 93 15 01 	sts	0x0115, r18
- 1f0:	21 c0       	rjmp	.+66     	; 0x234 <__vector_16+0x1a0>
-		if(2 == ((x >> 12) & 7)) if(leds_zg) leds = leds_zg;
- 1f2:	82 30       	cpi	r24, 0x02	; 2
- 1f4:	91 05       	cpc	r25, r1
- 1f6:	a1 05       	cpc	r26, r1
- 1f8:	b1 05       	cpc	r27, r1
- 1fa:	61 f4       	brne	.+24     	; 0x214 <__vector_16+0x180>
- 1fc:	20 91 02 01 	lds	r18, 0x0102
- 200:	30 91 03 01 	lds	r19, 0x0103
- 204:	21 15       	cp	r18, r1
- 206:	31 05       	cpc	r19, r1
- 208:	29 f1       	breq	.+74     	; 0x254 <__vector_16+0x1c0>
- 20a:	30 93 16 01 	sts	0x0116, r19
- 20e:	20 93 15 01 	sts	0x0115, r18
- 212:	20 c0       	rjmp	.+64     	; 0x254 <__vector_16+0x1c0>
-		if(3 == ((x >> 12) & 7)) if(leds_capo) leds = leds_capo;
- 214:	83 30       	cpi	r24, 0x03	; 3
- 216:	91 05       	cpc	r25, r1
- 218:	a1 05       	cpc	r26, r1
- 21a:	b1 05       	cpc	r27, r1
- 21c:	59 f4       	brne	.+22     	; 0x234 <__vector_16+0x1a0>
- 21e:	80 91 0a 01 	lds	r24, 0x010A
- 222:	90 91 0b 01 	lds	r25, 0x010B
- 226:	00 97       	sbiw	r24, 0x00	; 0
- 228:	19 f1       	breq	.+70     	; 0x270 <__vector_16+0x1dc>
- 22a:	90 93 16 01 	sts	0x0116, r25
- 22e:	80 93 15 01 	sts	0x0115, r24
- 232:	1e c0       	rjmp	.+60     	; 0x270 <__vector_16+0x1dc>
-		if(4 == ((x >> 12) & 7)) if(leds_zo) leds = leds_zo;
- 234:	84 30       	cpi	r24, 0x04	; 4
- 236:	91 05       	cpc	r25, r1
- 238:	a1 05       	cpc	r26, r1
- 23a:	b1 05       	cpc	r27, r1
- 23c:	59 f4       	brne	.+22     	; 0x254 <__vector_16+0x1c0>
- 23e:	80 91 06 01 	lds	r24, 0x0106
- 242:	90 91 07 01 	lds	r25, 0x0107
- 246:	00 97       	sbiw	r24, 0x00	; 0
- 248:	99 f0       	breq	.+38     	; 0x270 <__vector_16+0x1dc>
- 24a:	90 93 16 01 	sts	0x0116, r25
- 24e:	80 93 15 01 	sts	0x0115, r24
- 252:	0e c0       	rjmp	.+28     	; 0x270 <__vector_16+0x1dc>
-		if(5 == ((x >> 12) & 7)) if(leds_zio) leds = leds_zio;
- 254:	05 97       	sbiw	r24, 0x05	; 5
- 256:	a1 05       	cpc	r26, r1
- 258:	b1 05       	cpc	r27, r1
- 25a:	51 f4       	brne	.+20     	; 0x270 <__vector_16+0x1dc>
- 25c:	80 91 04 01 	lds	r24, 0x0104
- 260:	90 91 05 01 	lds	r25, 0x0105
- 264:	00 97       	sbiw	r24, 0x00	; 0
- 266:	21 f0       	breq	.+8      	; 0x270 <__vector_16+0x1dc>
- 268:	90 93 16 01 	sts	0x0116, r25
- 26c:	80 93 15 01 	sts	0x0115, r24
-
-		leds_tmp = leds_capi | leds_capo | leds_zi | leds_zo | leds_zio | leds_zg | leds_v;
- 270:	20 91 0a 01 	lds	r18, 0x010A
- 274:	30 91 0b 01 	lds	r19, 0x010B
- 278:	80 91 0c 01 	lds	r24, 0x010C
- 27c:	90 91 0d 01 	lds	r25, 0x010D
- 280:	82 2b       	or	r24, r18
- 282:	93 2b       	or	r25, r19
- 284:	20 91 08 01 	lds	r18, 0x0108
- 288:	30 91 09 01 	lds	r19, 0x0109
- 28c:	82 2b       	or	r24, r18
- 28e:	93 2b       	or	r25, r19
- 290:	20 91 06 01 	lds	r18, 0x0106
- 294:	30 91 07 01 	lds	r19, 0x0107
- 298:	82 2b       	or	r24, r18
- 29a:	93 2b       	or	r25, r19
- 29c:	20 91 04 01 	lds	r18, 0x0104
- 2a0:	30 91 05 01 	lds	r19, 0x0105
- 2a4:	82 2b       	or	r24, r18
- 2a6:	93 2b       	or	r25, r19
- 2a8:	20 91 02 01 	lds	r18, 0x0102
- 2ac:	30 91 03 01 	lds	r19, 0x0103
- 2b0:	82 2b       	or	r24, r18
- 2b2:	93 2b       	or	r25, r19
- 2b4:	20 91 00 01 	lds	r18, 0x0100
- 2b8:	30 91 01 01 	lds	r19, 0x0101
- 2bc:	82 2b       	or	r24, r18
- 2be:	93 2b       	or	r25, r19
-		if(!(leds_tmp & (1 << 13))) leds = leds_tmp |= (1 << 12);
- 2c0:	95 ff       	sbrs	r25, 5
- 2c2:	05 c0       	rjmp	.+10     	; 0x2ce <__vector_16+0x23a>
-		if(2 == ((x >> 12) & 7)) if(leds_zg) leds = leds_zg;
-		if(3 == ((x >> 12) & 7)) if(leds_capo) leds = leds_capo;
-		if(4 == ((x >> 12) & 7)) if(leds_zo) leds = leds_zo;
-		if(5 == ((x >> 12) & 7)) if(leds_zio) leds = leds_zio;
-
-		leds_tmp = leds_capi | leds_capo | leds_zi | leds_zo | leds_zio | leds_zg | leds_v;
- 2c4:	90 93 0f 01 	sts	0x010F, r25
- 2c8:	80 93 0e 01 	sts	0x010E, r24
- 2cc:	09 c0       	rjmp	.+18     	; 0x2e0 <__vector_16+0x24c>
-		if(!(leds_tmp & (1 << 13))) leds = leds_tmp |= (1 << 12);
- 2ce:	90 61       	ori	r25, 0x10	; 16
- 2d0:	90 93 0f 01 	sts	0x010F, r25
- 2d4:	80 93 0e 01 	sts	0x010E, r24
- 2d8:	90 93 16 01 	sts	0x0116, r25
- 2dc:	80 93 15 01 	sts	0x0115, r24
-		if(6 == ((x >> 13) & 7)) if(leds_tmp) leds = leds_tmp;
- 2e0:	03 2e       	mov	r0, r19
- 2e2:	3d e0       	ldi	r19, 0x0D	; 13
- 2e4:	76 95       	lsr	r23
- 2e6:	67 95       	ror	r22
- 2e8:	57 95       	ror	r21
- 2ea:	47 95       	ror	r20
- 2ec:	3a 95       	dec	r19
- 2ee:	d1 f7       	brne	.-12     	; 0x2e4 <__vector_16+0x250>
- 2f0:	30 2d       	mov	r19, r0
- 2f2:	47 70       	andi	r20, 0x07	; 7
- 2f4:	55 27       	eor	r21, r21
- 2f6:	66 27       	eor	r22, r22
- 2f8:	77 27       	eor	r23, r23
- 2fa:	46 30       	cpi	r20, 0x06	; 6
- 2fc:	51 05       	cpc	r21, r1
- 2fe:	61 05       	cpc	r22, r1
- 300:	71 05       	cpc	r23, r1
- 302:	51 f4       	brne	.+20     	; 0x318 <__stack+0x19>
- 304:	80 91 0e 01 	lds	r24, 0x010E
- 308:	90 91 0f 01 	lds	r25, 0x010F
- 30c:	00 97       	sbiw	r24, 0x00	; 0
- 30e:	21 f0       	breq	.+8      	; 0x318 <__stack+0x19>
- 310:	90 93 16 01 	sts	0x0116, r25
- 314:	80 93 15 01 	sts	0x0115, r24
-		
+ 16a:	80 91 14 01 	lds	r24, 0x0114
+ 16e:	90 91 15 01 	lds	r25, 0x0115
+ 172:	a0 91 16 01 	lds	r26, 0x0116
+ 176:	b0 91 17 01 	lds	r27, 0x0117
+ 17a:	01 96       	adiw	r24, 0x01	; 1
+ 17c:	a1 1d       	adc	r26, r1
+ 17e:	b1 1d       	adc	r27, r1
+ 180:	80 93 14 01 	sts	0x0114, r24
+ 184:	90 93 15 01 	sts	0x0115, r25
+ 188:	a0 93 16 01 	sts	0x0116, r26
+ 18c:	b0 93 17 01 	sts	0x0117, r27
+		if(leds_brd | leds_brd_su) leds = leds_brd | leds_brd_su;
+ 190:	40 91 00 01 	lds	r20, 0x0100
+ 194:	50 91 01 01 	lds	r21, 0x0101
+ 198:	20 91 02 01 	lds	r18, 0x0102
+ 19c:	30 91 03 01 	lds	r19, 0x0103
+ 1a0:	24 2b       	or	r18, r20
+ 1a2:	35 2b       	or	r19, r21
+ 1a4:	21 15       	cp	r18, r1
+ 1a6:	31 05       	cpc	r19, r1
+ 1a8:	29 f0       	breq	.+10     	; 0x1b4 <__vector_16+0x120>
+ 1aa:	30 93 1a 01 	sts	0x011A, r19
+ 1ae:	20 93 19 01 	sts	0x0119, r18
+ 1b2:	c7 c0       	rjmp	.+398    	; 0x342 <__stack+0x43>
+		else{
+			if(0 == ((x >> 12) & 7)) if(leds_capi) leds = leds_capi;
+ 1b4:	ac 01       	movw	r20, r24
+ 1b6:	bd 01       	movw	r22, r26
+ 1b8:	03 2e       	mov	r0, r19
+ 1ba:	3c e0       	ldi	r19, 0x0C	; 12
+ 1bc:	76 95       	lsr	r23
+ 1be:	67 95       	ror	r22
+ 1c0:	57 95       	ror	r21
+ 1c2:	47 95       	ror	r20
+ 1c4:	3a 95       	dec	r19
+ 1c6:	d1 f7       	brne	.-12     	; 0x1bc <__vector_16+0x128>
+ 1c8:	30 2d       	mov	r19, r0
+ 1ca:	47 70       	andi	r20, 0x07	; 7
+ 1cc:	55 27       	eor	r21, r21
+ 1ce:	66 27       	eor	r22, r22
+ 1d0:	77 27       	eor	r23, r23
+ 1d2:	41 15       	cp	r20, r1
+ 1d4:	51 05       	cpc	r21, r1
+ 1d6:	61 05       	cpc	r22, r1
+ 1d8:	71 05       	cpc	r23, r1
+ 1da:	61 f4       	brne	.+24     	; 0x1f4 <__vector_16+0x160>
+ 1dc:	20 91 10 01 	lds	r18, 0x0110
+ 1e0:	30 91 11 01 	lds	r19, 0x0111
+ 1e4:	21 15       	cp	r18, r1
+ 1e6:	31 05       	cpc	r19, r1
+ 1e8:	39 f1       	breq	.+78     	; 0x238 <__vector_16+0x1a4>
+ 1ea:	30 93 1a 01 	sts	0x011A, r19
+ 1ee:	20 93 19 01 	sts	0x0119, r18
+ 1f2:	22 c0       	rjmp	.+68     	; 0x238 <__vector_16+0x1a4>
+			if(1 == ((x >> 12) & 7)) if(leds_zi) leds = leds_zi;
+ 1f4:	41 30       	cpi	r20, 0x01	; 1
+ 1f6:	51 05       	cpc	r21, r1
+ 1f8:	61 05       	cpc	r22, r1
+ 1fa:	71 05       	cpc	r23, r1
+ 1fc:	61 f4       	brne	.+24     	; 0x216 <__vector_16+0x182>
+ 1fe:	20 91 0c 01 	lds	r18, 0x010C
+ 202:	30 91 0d 01 	lds	r19, 0x010D
+ 206:	21 15       	cp	r18, r1
+ 208:	31 05       	cpc	r19, r1
+ 20a:	39 f1       	breq	.+78     	; 0x25a <__vector_16+0x1c6>
+ 20c:	30 93 1a 01 	sts	0x011A, r19
+ 210:	20 93 19 01 	sts	0x0119, r18
+ 214:	22 c0       	rjmp	.+68     	; 0x25a <__vector_16+0x1c6>
+			if(2 == ((x >> 12) & 7)) if(leds_zg) leds = leds_zg;
+ 216:	42 30       	cpi	r20, 0x02	; 2
+ 218:	51 05       	cpc	r21, r1
+ 21a:	61 05       	cpc	r22, r1
+ 21c:	71 05       	cpc	r23, r1
+ 21e:	61 f4       	brne	.+24     	; 0x238 <__vector_16+0x1a4>
+ 220:	20 91 06 01 	lds	r18, 0x0106
+ 224:	30 91 07 01 	lds	r19, 0x0107
+ 228:	21 15       	cp	r18, r1
+ 22a:	31 05       	cpc	r19, r1
+ 22c:	39 f1       	breq	.+78     	; 0x27c <__vector_16+0x1e8>
+ 22e:	30 93 1a 01 	sts	0x011A, r19
+ 232:	20 93 19 01 	sts	0x0119, r18
+ 236:	22 c0       	rjmp	.+68     	; 0x27c <__vector_16+0x1e8>
+			if(3 == ((x >> 12) & 7)) if(leds_capo) leds = leds_capo;
+ 238:	43 30       	cpi	r20, 0x03	; 3
+ 23a:	51 05       	cpc	r21, r1
+ 23c:	61 05       	cpc	r22, r1
+ 23e:	71 05       	cpc	r23, r1
+ 240:	61 f4       	brne	.+24     	; 0x25a <__vector_16+0x1c6>
+ 242:	20 91 0e 01 	lds	r18, 0x010E
+ 246:	30 91 0f 01 	lds	r19, 0x010F
+ 24a:	21 15       	cp	r18, r1
+ 24c:	31 05       	cpc	r19, r1
+ 24e:	31 f1       	breq	.+76     	; 0x29c <__vector_16+0x208>
+ 250:	30 93 1a 01 	sts	0x011A, r19
+ 254:	20 93 19 01 	sts	0x0119, r18
+ 258:	21 c0       	rjmp	.+66     	; 0x29c <__vector_16+0x208>
+			if(4 == ((x >> 12) & 7)) if(leds_zo) leds = leds_zo;
+ 25a:	44 30       	cpi	r20, 0x04	; 4
+ 25c:	51 05       	cpc	r21, r1
+ 25e:	61 05       	cpc	r22, r1
+ 260:	71 05       	cpc	r23, r1
+ 262:	61 f4       	brne	.+24     	; 0x27c <__vector_16+0x1e8>
+ 264:	20 91 0a 01 	lds	r18, 0x010A
+ 268:	30 91 0b 01 	lds	r19, 0x010B
+ 26c:	21 15       	cp	r18, r1
+ 26e:	31 05       	cpc	r19, r1
+ 270:	a9 f0       	breq	.+42     	; 0x29c <__vector_16+0x208>
+ 272:	30 93 1a 01 	sts	0x011A, r19
+ 276:	20 93 19 01 	sts	0x0119, r18
+ 27a:	10 c0       	rjmp	.+32     	; 0x29c <__vector_16+0x208>
+			if(5 == ((x >> 12) & 7)) if(leds_zio) leds = leds_zio;
+ 27c:	45 30       	cpi	r20, 0x05	; 5
+ 27e:	51 05       	cpc	r21, r1
+ 280:	61 05       	cpc	r22, r1
+ 282:	71 05       	cpc	r23, r1
+ 284:	59 f4       	brne	.+22     	; 0x29c <__vector_16+0x208>
+ 286:	20 91 08 01 	lds	r18, 0x0108
+ 28a:	30 91 09 01 	lds	r19, 0x0109
+ 28e:	21 15       	cp	r18, r1
+ 290:	31 05       	cpc	r19, r1
+ 292:	21 f0       	breq	.+8      	; 0x29c <__vector_16+0x208>
+ 294:	30 93 1a 01 	sts	0x011A, r19
+ 298:	20 93 19 01 	sts	0x0119, r18
+			//if(6 == ((x >> 12) & 7)) if(leds_oc) leds = leds_oc;
+			leds_tmp = leds_capi | leds_capo | leds_zi | leds_zo | leds_zio | leds_zg | leds_v;// | leds_oc;
+ 29c:	40 91 0e 01 	lds	r20, 0x010E
+ 2a0:	50 91 0f 01 	lds	r21, 0x010F
+ 2a4:	20 91 10 01 	lds	r18, 0x0110
+ 2a8:	30 91 11 01 	lds	r19, 0x0111
+ 2ac:	24 2b       	or	r18, r20
+ 2ae:	35 2b       	or	r19, r21
+ 2b0:	40 91 0c 01 	lds	r20, 0x010C
+ 2b4:	50 91 0d 01 	lds	r21, 0x010D
+ 2b8:	24 2b       	or	r18, r20
+ 2ba:	35 2b       	or	r19, r21
+ 2bc:	40 91 0a 01 	lds	r20, 0x010A
+ 2c0:	50 91 0b 01 	lds	r21, 0x010B
+ 2c4:	24 2b       	or	r18, r20
+ 2c6:	35 2b       	or	r19, r21
+ 2c8:	40 91 08 01 	lds	r20, 0x0108
+ 2cc:	50 91 09 01 	lds	r21, 0x0109
+ 2d0:	24 2b       	or	r18, r20
+ 2d2:	35 2b       	or	r19, r21
+ 2d4:	40 91 06 01 	lds	r20, 0x0106
+ 2d8:	50 91 07 01 	lds	r21, 0x0107
+ 2dc:	24 2b       	or	r18, r20
+ 2de:	35 2b       	or	r19, r21
+ 2e0:	40 91 04 01 	lds	r20, 0x0104
+ 2e4:	50 91 05 01 	lds	r21, 0x0105
+ 2e8:	24 2b       	or	r18, r20
+ 2ea:	35 2b       	or	r19, r21
+			if(!(leds_tmp & (1 << 13))) leds = leds_tmp |= (1 << 12);
+ 2ec:	35 ff       	sbrs	r19, 5
+ 2ee:	05 c0       	rjmp	.+10     	; 0x2fa <__vector_16+0x266>
+			if(2 == ((x >> 12) & 7)) if(leds_zg) leds = leds_zg;
+			if(3 == ((x >> 12) & 7)) if(leds_capo) leds = leds_capo;
+			if(4 == ((x >> 12) & 7)) if(leds_zo) leds = leds_zo;
+			if(5 == ((x >> 12) & 7)) if(leds_zio) leds = leds_zio;
+			//if(6 == ((x >> 12) & 7)) if(leds_oc) leds = leds_oc;
+			leds_tmp = leds_capi | leds_capo | leds_zi | leds_zo | leds_zio | leds_zg | leds_v;// | leds_oc;
+ 2f0:	30 93 13 01 	sts	0x0113, r19
+ 2f4:	20 93 12 01 	sts	0x0112, r18
+ 2f8:	09 c0       	rjmp	.+18     	; 0x30c <__stack+0xd>
+			if(!(leds_tmp & (1 << 13))) leds = leds_tmp |= (1 << 12);
+ 2fa:	30 61       	ori	r19, 0x10	; 16
+ 2fc:	30 93 13 01 	sts	0x0113, r19
+ 300:	20 93 12 01 	sts	0x0112, r18
+ 304:	30 93 1a 01 	sts	0x011A, r19
+ 308:	20 93 19 01 	sts	0x0119, r18
+			if(6 == ((x >> 13) & 7)) if(leds_tmp) leds = leds_tmp;
+ 30c:	07 2e       	mov	r0, r23
+ 30e:	7d e0       	ldi	r23, 0x0D	; 13
+ 310:	b6 95       	lsr	r27
+ 312:	a7 95       	ror	r26
+ 314:	97 95       	ror	r25
+ 316:	87 95       	ror	r24
+ 318:	7a 95       	dec	r23
+ 31a:	d1 f7       	brne	.-12     	; 0x310 <__stack+0x11>
+ 31c:	70 2d       	mov	r23, r0
+ 31e:	87 70       	andi	r24, 0x07	; 7
+ 320:	99 27       	eor	r25, r25
+ 322:	aa 27       	eor	r26, r26
+ 324:	bb 27       	eor	r27, r27
+ 326:	06 97       	sbiw	r24, 0x06	; 6
+ 328:	a1 05       	cpc	r26, r1
+ 32a:	b1 05       	cpc	r27, r1
+ 32c:	51 f4       	brne	.+20     	; 0x342 <__stack+0x43>
+ 32e:	80 91 12 01 	lds	r24, 0x0112
+ 332:	90 91 13 01 	lds	r25, 0x0113
+ 336:	00 97       	sbiw	r24, 0x00	; 0
+ 338:	21 f0       	breq	.+8      	; 0x342 <__stack+0x43>
+ 33a:	90 93 1a 01 	sts	0x011A, r25
+ 33e:	80 93 19 01 	sts	0x0119, r24
+		}
 		
 	}
 	led_row++;
- 318:	80 91 14 01 	lds	r24, 0x0114
- 31c:	8f 5f       	subi	r24, 0xFF	; 255
- 31e:	80 93 14 01 	sts	0x0114, r24
+ 342:	80 91 18 01 	lds	r24, 0x0118
+ 346:	8f 5f       	subi	r24, 0xFF	; 255
+ 348:	80 93 18 01 	sts	0x0118, r24
 
 
 	
 }
- 322:	bf 91       	pop	r27
- 324:	af 91       	pop	r26
- 326:	9f 91       	pop	r25
- 328:	8f 91       	pop	r24
- 32a:	7f 91       	pop	r23
- 32c:	6f 91       	pop	r22
- 32e:	5f 91       	pop	r21
- 330:	4f 91       	pop	r20
- 332:	3f 91       	pop	r19
- 334:	2f 91       	pop	r18
- 336:	0f 90       	pop	r0
- 338:	0f be       	out	0x3f, r0	; 63
- 33a:	0f 90       	pop	r0
- 33c:	1f 90       	pop	r1
- 33e:	18 95       	reti
+ 34c:	bf 91       	pop	r27
+ 34e:	af 91       	pop	r26
+ 350:	9f 91       	pop	r25
+ 352:	8f 91       	pop	r24
+ 354:	7f 91       	pop	r23
+ 356:	6f 91       	pop	r22
+ 358:	5f 91       	pop	r21
+ 35a:	4f 91       	pop	r20
+ 35c:	3f 91       	pop	r19
+ 35e:	2f 91       	pop	r18
+ 360:	0f 90       	pop	r0
+ 362:	0f be       	out	0x3f, r0	; 63
+ 364:	0f 90       	pop	r0
+ 366:	1f 90       	pop	r1
+ 368:	18 95       	reti
 
-00000340 <_Z15ADC_blocking_ina>:
+0000036a <_Z15ADC_blocking_ina>:
 }
 */
 
 int16_t ADC_blocking_in(int8_t channel)
 {
 	ADMUX = (1 << REFS1) | (1 << REFS0) | channel;
- 340:	80 6c       	ori	r24, 0xC0	; 192
- 342:	80 93 7c 00 	sts	0x007C, r24
+ 36a:	80 6c       	ori	r24, 0xC0	; 192
+ 36c:	80 93 7c 00 	sts	0x007C, r24
 	ADCSRA = (1 << ADEN) | (0 << ADIE) | (1 << ADSC) | (0 << ADATE) | 6;
- 346:	86 ec       	ldi	r24, 0xC6	; 198
- 348:	80 93 7a 00 	sts	0x007A, r24
+ 370:	86 ec       	ldi	r24, 0xC6	; 198
+ 372:	80 93 7a 00 	sts	0x007A, r24
 	ADCSRB = 0;
- 34c:	10 92 7b 00 	sts	0x007B, r1
+ 376:	10 92 7b 00 	sts	0x007B, r1
 	while(!(ADCSRA & (1 << ADIF)));
- 350:	ea e7       	ldi	r30, 0x7A	; 122
- 352:	f0 e0       	ldi	r31, 0x00	; 0
- 354:	80 81       	ld	r24, Z
- 356:	84 ff       	sbrs	r24, 4
- 358:	fd cf       	rjmp	.-6      	; 0x354 <_Z15ADC_blocking_ina+0x14>
+ 37a:	ea e7       	ldi	r30, 0x7A	; 122
+ 37c:	f0 e0       	ldi	r31, 0x00	; 0
+ 37e:	80 81       	ld	r24, Z
+ 380:	84 ff       	sbrs	r24, 4
+ 382:	fd cf       	rjmp	.-6      	; 0x37e <_Z15ADC_blocking_ina+0x14>
 	ADCSRA |= (1 << ADIF);
- 35a:	ea e7       	ldi	r30, 0x7A	; 122
- 35c:	f0 e0       	ldi	r31, 0x00	; 0
- 35e:	80 81       	ld	r24, Z
- 360:	80 61       	ori	r24, 0x10	; 16
- 362:	80 83       	st	Z, r24
+ 384:	ea e7       	ldi	r30, 0x7A	; 122
+ 386:	f0 e0       	ldi	r31, 0x00	; 0
+ 388:	80 81       	ld	r24, Z
+ 38a:	80 61       	ori	r24, 0x10	; 16
+ 38c:	80 83       	st	Z, r24
 	return ADC;
- 364:	80 91 78 00 	lds	r24, 0x0078
- 368:	90 91 79 00 	lds	r25, 0x0079
+ 38e:	80 91 78 00 	lds	r24, 0x0078
+ 392:	90 91 79 00 	lds	r25, 0x0079
 }
- 36c:	08 95       	ret
+ 396:	08 95       	ret
 
-0000036e <_Z15CAP_blocking_inal>:
+00000398 <_Z15CAP_blocking_inal>:
 
 int32_t CAP_blocking_in(int8_t chan, int32_t Ucc)
 {
- 36e:	4f 92       	push	r4
- 370:	5f 92       	push	r5
- 372:	6f 92       	push	r6
- 374:	7f 92       	push	r7
- 376:	8f 92       	push	r8
- 378:	9f 92       	push	r9
- 37a:	af 92       	push	r10
- 37c:	bf 92       	push	r11
- 37e:	cf 92       	push	r12
- 380:	df 92       	push	r13
- 382:	ef 92       	push	r14
- 384:	ff 92       	push	r15
- 386:	1f 93       	push	r17
- 388:	cf 93       	push	r28
- 38a:	df 93       	push	r29
- 38c:	18 2f       	mov	r17, r24
- 38e:	4a 01       	movw	r8, r20
- 390:	5b 01       	movw	r10, r22
+ 398:	4f 92       	push	r4
+ 39a:	5f 92       	push	r5
+ 39c:	6f 92       	push	r6
+ 39e:	7f 92       	push	r7
+ 3a0:	8f 92       	push	r8
+ 3a2:	9f 92       	push	r9
+ 3a4:	af 92       	push	r10
+ 3a6:	bf 92       	push	r11
+ 3a8:	cf 92       	push	r12
+ 3aa:	df 92       	push	r13
+ 3ac:	ef 92       	push	r14
+ 3ae:	ff 92       	push	r15
+ 3b0:	1f 93       	push	r17
+ 3b2:	cf 93       	push	r28
+ 3b4:	df 93       	push	r29
+ 3b6:	18 2f       	mov	r17, r24
+ 3b8:	4a 01       	movw	r8, r20
+ 3ba:	5b 01       	movw	r10, r22
 	int32_t C, Ucap;
 	int16_t i, k;
 	Ucap = 0;
 	k = 1000;
 	for(i=0;i<k;i++){ // Ucapi += 16 for 1uF
- 392:	c0 e0       	ldi	r28, 0x00	; 0
- 394:	d0 e0       	ldi	r29, 0x00	; 0
+ 3bc:	c0 e0       	ldi	r28, 0x00	; 0
+ 3be:	d0 e0       	ldi	r29, 0x00	; 0
 		Ucap = ADC_blocking_in(2);
- 396:	82 e0       	ldi	r24, 0x02	; 2
- 398:	d3 df       	rcall	.-90     	; 0x340 <_Z15ADC_blocking_ina>
- 39a:	6c 01       	movw	r12, r24
- 39c:	ee 24       	eor	r14, r14
- 39e:	d7 fc       	sbrc	r13, 7
- 3a0:	e0 94       	com	r14
- 3a2:	fe 2c       	mov	r15, r14
+ 3c0:	82 e0       	ldi	r24, 0x02	; 2
+ 3c2:	d3 df       	rcall	.-90     	; 0x36a <_Z15ADC_blocking_ina>
+ 3c4:	6c 01       	movw	r12, r24
+ 3c6:	ee 24       	eor	r14, r14
+ 3c8:	d7 fc       	sbrc	r13, 7
+ 3ca:	e0 94       	com	r14
+ 3cc:	fe 2c       	mov	r15, r14
 		Ucap -= ADC_blocking_in(chan);
- 3a4:	81 2f       	mov	r24, r17
- 3a6:	cc df       	rcall	.-104    	; 0x340 <_Z15ADC_blocking_ina>
- 3a8:	aa 27       	eor	r26, r26
- 3aa:	97 fd       	sbrc	r25, 7
- 3ac:	a0 95       	com	r26
- 3ae:	ba 2f       	mov	r27, r26
- 3b0:	a7 01       	movw	r20, r14
- 3b2:	96 01       	movw	r18, r12
- 3b4:	28 1b       	sub	r18, r24
- 3b6:	39 0b       	sbc	r19, r25
- 3b8:	4a 0b       	sbc	r20, r26
- 3ba:	5b 0b       	sbc	r21, r27
+ 3ce:	81 2f       	mov	r24, r17
+ 3d0:	cc df       	rcall	.-104    	; 0x36a <_Z15ADC_blocking_ina>
+ 3d2:	aa 27       	eor	r26, r26
+ 3d4:	97 fd       	sbrc	r25, 7
+ 3d6:	a0 95       	com	r26
+ 3d8:	ba 2f       	mov	r27, r26
+ 3da:	a7 01       	movw	r20, r14
+ 3dc:	96 01       	movw	r18, r12
+ 3de:	28 1b       	sub	r18, r24
+ 3e0:	39 0b       	sbc	r19, r25
+ 3e2:	4a 0b       	sbc	r20, r26
+ 3e4:	5b 0b       	sbc	r21, r27
 		if (Ucap > 100) break;
- 3bc:	25 36       	cpi	r18, 0x65	; 101
- 3be:	31 05       	cpc	r19, r1
- 3c0:	41 05       	cpc	r20, r1
- 3c2:	51 05       	cpc	r21, r1
- 3c4:	2c f4       	brge	.+10     	; 0x3d0 <_Z15CAP_blocking_inal+0x62>
+ 3e6:	25 36       	cpi	r18, 0x65	; 101
+ 3e8:	31 05       	cpc	r19, r1
+ 3ea:	41 05       	cpc	r20, r1
+ 3ec:	51 05       	cpc	r21, r1
+ 3ee:	2c f4       	brge	.+10     	; 0x3fa <_Z15CAP_blocking_inal+0x62>
 {
 	int32_t C, Ucap;
 	int16_t i, k;
 	Ucap = 0;
 	k = 1000;
 	for(i=0;i<k;i++){ // Ucapi += 16 for 1uF
- 3c6:	21 96       	adiw	r28, 0x01	; 1
- 3c8:	c8 3e       	cpi	r28, 0xE8	; 232
- 3ca:	83 e0       	ldi	r24, 0x03	; 3
- 3cc:	d8 07       	cpc	r29, r24
- 3ce:	19 f7       	brne	.-58     	; 0x396 <_Z15CAP_blocking_inal+0x28>
+ 3f0:	21 96       	adiw	r28, 0x01	; 1
+ 3f2:	c8 3e       	cpi	r28, 0xE8	; 232
+ 3f4:	83 e0       	ldi	r24, 0x03	; 3
+ 3f6:	d8 07       	cpc	r29, r24
+ 3f8:	19 f7       	brne	.-58     	; 0x3c0 <_Z15CAP_blocking_inal+0x28>
 		Ucap = ADC_blocking_in(2);
 		Ucap -= ADC_blocking_in(chan);
 		if (Ucap > 100) break;
 	}
 	Ucap = Ucap * 1000 / i; // 16000 for 1 uF
- 3d0:	a8 ee       	ldi	r26, 0xE8	; 232
- 3d2:	b3 e0       	ldi	r27, 0x03	; 3
- 3d4:	c8 d2       	rcall	.+1424   	; 0x966 <__muluhisi3>
- 3d6:	2b 01       	movw	r4, r22
- 3d8:	3c 01       	movw	r6, r24
+ 3fa:	a8 ee       	ldi	r26, 0xE8	; 232
+ 3fc:	b3 e0       	ldi	r27, 0x03	; 3
+ 3fe:	e6 d2       	rcall	.+1484   	; 0x9cc <__muluhisi3>
+ 400:	2b 01       	movw	r4, r22
+ 402:	3c 01       	movw	r6, r24
 	C = 42*(Ucc - 120000) / Ucap; // Ci in 1 nF	
- 3da:	a5 01       	movw	r20, r10
- 3dc:	94 01       	movw	r18, r8
- 3de:	20 5c       	subi	r18, 0xC0	; 192
- 3e0:	34 4d       	sbci	r19, 0xD4	; 212
- 3e2:	41 40       	sbci	r20, 0x01	; 1
- 3e4:	51 09       	sbc	r21, r1
- 3e6:	aa e2       	ldi	r26, 0x2A	; 42
- 3e8:	b0 e0       	ldi	r27, 0x00	; 0
- 3ea:	bd d2       	rcall	.+1402   	; 0x966 <__muluhisi3>
- 3ec:	6b 01       	movw	r12, r22
- 3ee:	7c 01       	movw	r14, r24
+ 404:	a5 01       	movw	r20, r10
+ 406:	94 01       	movw	r18, r8
+ 408:	20 5c       	subi	r18, 0xC0	; 192
+ 40a:	34 4d       	sbci	r19, 0xD4	; 212
+ 40c:	41 40       	sbci	r20, 0x01	; 1
+ 40e:	51 09       	sbc	r21, r1
+ 410:	aa e2       	ldi	r26, 0x2A	; 42
+ 412:	b0 e0       	ldi	r27, 0x00	; 0
+ 414:	db d2       	rcall	.+1462   	; 0x9cc <__muluhisi3>
+ 416:	6b 01       	movw	r12, r22
+ 418:	7c 01       	movw	r14, r24
 	for(i=0;i<k;i++){ // Ucapi += 16 for 1uF
 		Ucap = ADC_blocking_in(2);
 		Ucap -= ADC_blocking_in(chan);
 		if (Ucap > 100) break;
 	}
 	Ucap = Ucap * 1000 / i; // 16000 for 1 uF
- 3f0:	9e 01       	movw	r18, r28
- 3f2:	44 27       	eor	r20, r20
- 3f4:	37 fd       	sbrc	r19, 7
- 3f6:	40 95       	com	r20
- 3f8:	54 2f       	mov	r21, r20
- 3fa:	c3 01       	movw	r24, r6
- 3fc:	b2 01       	movw	r22, r4
- 3fe:	97 d2       	rcall	.+1326   	; 0x92e <__divmodsi4>
+ 41a:	9e 01       	movw	r18, r28
+ 41c:	44 27       	eor	r20, r20
+ 41e:	37 fd       	sbrc	r19, 7
+ 420:	40 95       	com	r20
+ 422:	54 2f       	mov	r21, r20
+ 424:	c3 01       	movw	r24, r6
+ 426:	b2 01       	movw	r22, r4
+ 428:	b5 d2       	rcall	.+1386   	; 0x994 <__divmodsi4>
 	C = 42*(Ucc - 120000) / Ucap; // Ci in 1 nF	
- 400:	c7 01       	movw	r24, r14
- 402:	b6 01       	movw	r22, r12
- 404:	94 d2       	rcall	.+1320   	; 0x92e <__divmodsi4>
+ 42a:	c7 01       	movw	r24, r14
+ 42c:	b6 01       	movw	r22, r12
+ 42e:	b2 d2       	rcall	.+1380   	; 0x994 <__divmodsi4>
 	return C;
 }
- 406:	ca 01       	movw	r24, r20
- 408:	b9 01       	movw	r22, r18
- 40a:	df 91       	pop	r29
- 40c:	cf 91       	pop	r28
- 40e:	1f 91       	pop	r17
- 410:	ff 90       	pop	r15
- 412:	ef 90       	pop	r14
- 414:	df 90       	pop	r13
- 416:	cf 90       	pop	r12
- 418:	bf 90       	pop	r11
- 41a:	af 90       	pop	r10
- 41c:	9f 90       	pop	r9
- 41e:	8f 90       	pop	r8
- 420:	7f 90       	pop	r7
- 422:	6f 90       	pop	r6
- 424:	5f 90       	pop	r5
- 426:	4f 90       	pop	r4
- 428:	08 95       	ret
+ 430:	ca 01       	movw	r24, r20
+ 432:	b9 01       	movw	r22, r18
+ 434:	df 91       	pop	r29
+ 436:	cf 91       	pop	r28
+ 438:	1f 91       	pop	r17
+ 43a:	ff 90       	pop	r15
+ 43c:	ef 90       	pop	r14
+ 43e:	df 90       	pop	r13
+ 440:	cf 90       	pop	r12
+ 442:	bf 90       	pop	r11
+ 444:	af 90       	pop	r10
+ 446:	9f 90       	pop	r9
+ 448:	8f 90       	pop	r8
+ 44a:	7f 90       	pop	r7
+ 44c:	6f 90       	pop	r6
+ 44e:	5f 90       	pop	r5
+ 450:	4f 90       	pop	r4
+ 452:	08 95       	ret
 
-0000042a <_Z22measure_vreg_outp_voltv>:
+00000454 <_Z22measure_vreg_outp_voltv>:
 
 
 int32_t measure_vreg_outp_volt(void)
 {
- 42a:	cf 92       	push	r12
- 42c:	df 92       	push	r13
- 42e:	ef 92       	push	r14
- 430:	ff 92       	push	r15
- 432:	cf 93       	push	r28
- 434:	df 93       	push	r29
- 436:	c8 ee       	ldi	r28, 0xE8	; 232
- 438:	d3 e0       	ldi	r29, 0x03	; 3
+ 454:	cf 92       	push	r12
+ 456:	df 92       	push	r13
+ 458:	ef 92       	push	r14
+ 45a:	ff 92       	push	r15
+ 45c:	cf 93       	push	r28
+ 45e:	df 93       	push	r29
+ 460:	c8 ee       	ldi	r28, 0xE8	; 232
+ 462:	d3 e0       	ldi	r29, 0x03	; 3
 	int32_t Uout;
 	int16_t i, k;
 	Uout = 0;
- 43a:	c1 2c       	mov	r12, r1
- 43c:	d1 2c       	mov	r13, r1
- 43e:	76 01       	movw	r14, r12
+ 464:	c1 2c       	mov	r12, r1
+ 466:	d1 2c       	mov	r13, r1
+ 468:	76 01       	movw	r14, r12
 	k = 1000;
 	for(i=0;i<k;i++){
 		Uout += ADC_blocking_in(1);
- 440:	81 e0       	ldi	r24, 0x01	; 1
- 442:	7e df       	rcall	.-260    	; 0x340 <_Z15ADC_blocking_ina>
- 444:	aa 27       	eor	r26, r26
- 446:	97 fd       	sbrc	r25, 7
- 448:	a0 95       	com	r26
- 44a:	ba 2f       	mov	r27, r26
- 44c:	c8 0e       	add	r12, r24
- 44e:	d9 1e       	adc	r13, r25
- 450:	ea 1e       	adc	r14, r26
- 452:	fb 1e       	adc	r15, r27
+ 46a:	81 e0       	ldi	r24, 0x01	; 1
+ 46c:	7e df       	rcall	.-260    	; 0x36a <_Z15ADC_blocking_ina>
+ 46e:	aa 27       	eor	r26, r26
+ 470:	97 fd       	sbrc	r25, 7
+ 472:	a0 95       	com	r26
+ 474:	ba 2f       	mov	r27, r26
+ 476:	c8 0e       	add	r12, r24
+ 478:	d9 1e       	adc	r13, r25
+ 47a:	ea 1e       	adc	r14, r26
+ 47c:	fb 1e       	adc	r15, r27
 		Uout -= ADC_blocking_in(2);
- 454:	82 e0       	ldi	r24, 0x02	; 2
- 456:	74 df       	rcall	.-280    	; 0x340 <_Z15ADC_blocking_ina>
- 458:	aa 27       	eor	r26, r26
- 45a:	97 fd       	sbrc	r25, 7
- 45c:	a0 95       	com	r26
- 45e:	ba 2f       	mov	r27, r26
- 460:	c8 1a       	sub	r12, r24
- 462:	d9 0a       	sbc	r13, r25
- 464:	ea 0a       	sbc	r14, r26
- 466:	fb 0a       	sbc	r15, r27
- 468:	21 97       	sbiw	r28, 0x01	; 1
+ 47e:	82 e0       	ldi	r24, 0x02	; 2
+ 480:	74 df       	rcall	.-280    	; 0x36a <_Z15ADC_blocking_ina>
+ 482:	aa 27       	eor	r26, r26
+ 484:	97 fd       	sbrc	r25, 7
+ 486:	a0 95       	com	r26
+ 488:	ba 2f       	mov	r27, r26
+ 48a:	c8 1a       	sub	r12, r24
+ 48c:	d9 0a       	sbc	r13, r25
+ 48e:	ea 0a       	sbc	r14, r26
+ 490:	fb 0a       	sbc	r15, r27
+ 492:	21 97       	sbiw	r28, 0x01	; 1
 {
 	int32_t Uout;
 	int16_t i, k;
 	Uout = 0;
 	k = 1000;
 	for(i=0;i<k;i++){
- 46a:	20 97       	sbiw	r28, 0x00	; 0
- 46c:	49 f7       	brne	.-46     	; 0x440 <_Z22measure_vreg_outp_voltv+0x16>
+ 494:	20 97       	sbiw	r28, 0x00	; 0
+ 496:	49 f7       	brne	.-46     	; 0x46a <_Z22measure_vreg_outp_voltv+0x16>
 		Uout += ADC_blocking_in(1);
 		Uout -= ADC_blocking_in(2);
 	}
 	Uout /= k;	
- 46e:	c7 01       	movw	r24, r14
- 470:	b6 01       	movw	r22, r12
- 472:	28 ee       	ldi	r18, 0xE8	; 232
- 474:	33 e0       	ldi	r19, 0x03	; 3
- 476:	40 e0       	ldi	r20, 0x00	; 0
- 478:	50 e0       	ldi	r21, 0x00	; 0
- 47a:	59 d2       	rcall	.+1202   	; 0x92e <__divmodsi4>
+ 498:	c7 01       	movw	r24, r14
+ 49a:	b6 01       	movw	r22, r12
+ 49c:	28 ee       	ldi	r18, 0xE8	; 232
+ 49e:	33 e0       	ldi	r19, 0x03	; 3
+ 4a0:	40 e0       	ldi	r20, 0x00	; 0
+ 4a2:	50 e0       	ldi	r21, 0x00	; 0
+ 4a4:	77 d2       	rcall	.+1262   	; 0x994 <__divmodsi4>
 	return Uout;
 }
- 47c:	ca 01       	movw	r24, r20
- 47e:	b9 01       	movw	r22, r18
- 480:	df 91       	pop	r29
- 482:	cf 91       	pop	r28
- 484:	ff 90       	pop	r15
- 486:	ef 90       	pop	r14
- 488:	df 90       	pop	r13
- 48a:	cf 90       	pop	r12
- 48c:	08 95       	ret
+ 4a6:	ca 01       	movw	r24, r20
+ 4a8:	b9 01       	movw	r22, r18
+ 4aa:	df 91       	pop	r29
+ 4ac:	cf 91       	pop	r28
+ 4ae:	ff 90       	pop	r15
+ 4b0:	ef 90       	pop	r14
+ 4b2:	df 90       	pop	r13
+ 4b4:	cf 90       	pop	r12
+ 4b6:	08 95       	ret
 
-0000048e <_Z21measure_vreg_inp_voltv>:
+000004b8 <_Z21measure_vreg_inp_voltv>:
 
 
 int32_t measure_vreg_inp_volt(void)
 {
- 48e:	cf 92       	push	r12
- 490:	df 92       	push	r13
- 492:	ef 92       	push	r14
- 494:	ff 92       	push	r15
- 496:	cf 93       	push	r28
- 498:	df 93       	push	r29
- 49a:	c8 ee       	ldi	r28, 0xE8	; 232
- 49c:	d3 e0       	ldi	r29, 0x03	; 3
+ 4b8:	cf 92       	push	r12
+ 4ba:	df 92       	push	r13
+ 4bc:	ef 92       	push	r14
+ 4be:	ff 92       	push	r15
+ 4c0:	cf 93       	push	r28
+ 4c2:	df 93       	push	r29
+ 4c4:	c8 ee       	ldi	r28, 0xE8	; 232
+ 4c6:	d3 e0       	ldi	r29, 0x03	; 3
 	int32_t Uout;
 	int16_t i, k;
 	Uout = 0;
- 49e:	c1 2c       	mov	r12, r1
- 4a0:	d1 2c       	mov	r13, r1
- 4a2:	76 01       	movw	r14, r12
+ 4c8:	c1 2c       	mov	r12, r1
+ 4ca:	d1 2c       	mov	r13, r1
+ 4cc:	76 01       	movw	r14, r12
 	k = 1000;
 	for(i=0;i<k;i++){
 		Uout += ADC_blocking_in(3);
- 4a4:	83 e0       	ldi	r24, 0x03	; 3
- 4a6:	4c df       	rcall	.-360    	; 0x340 <_Z15ADC_blocking_ina>
- 4a8:	aa 27       	eor	r26, r26
- 4aa:	97 fd       	sbrc	r25, 7
- 4ac:	a0 95       	com	r26
- 4ae:	ba 2f       	mov	r27, r26
- 4b0:	c8 0e       	add	r12, r24
- 4b2:	d9 1e       	adc	r13, r25
- 4b4:	ea 1e       	adc	r14, r26
- 4b6:	fb 1e       	adc	r15, r27
+ 4ce:	83 e0       	ldi	r24, 0x03	; 3
+ 4d0:	4c df       	rcall	.-360    	; 0x36a <_Z15ADC_blocking_ina>
+ 4d2:	aa 27       	eor	r26, r26
+ 4d4:	97 fd       	sbrc	r25, 7
+ 4d6:	a0 95       	com	r26
+ 4d8:	ba 2f       	mov	r27, r26
+ 4da:	c8 0e       	add	r12, r24
+ 4dc:	d9 1e       	adc	r13, r25
+ 4de:	ea 1e       	adc	r14, r26
+ 4e0:	fb 1e       	adc	r15, r27
 		Uout -= ADC_blocking_in(2);
- 4b8:	82 e0       	ldi	r24, 0x02	; 2
- 4ba:	42 df       	rcall	.-380    	; 0x340 <_Z15ADC_blocking_ina>
- 4bc:	aa 27       	eor	r26, r26
- 4be:	97 fd       	sbrc	r25, 7
- 4c0:	a0 95       	com	r26
- 4c2:	ba 2f       	mov	r27, r26
- 4c4:	c8 1a       	sub	r12, r24
- 4c6:	d9 0a       	sbc	r13, r25
- 4c8:	ea 0a       	sbc	r14, r26
- 4ca:	fb 0a       	sbc	r15, r27
- 4cc:	21 97       	sbiw	r28, 0x01	; 1
+ 4e2:	82 e0       	ldi	r24, 0x02	; 2
+ 4e4:	42 df       	rcall	.-380    	; 0x36a <_Z15ADC_blocking_ina>
+ 4e6:	aa 27       	eor	r26, r26
+ 4e8:	97 fd       	sbrc	r25, 7
+ 4ea:	a0 95       	com	r26
+ 4ec:	ba 2f       	mov	r27, r26
+ 4ee:	c8 1a       	sub	r12, r24
+ 4f0:	d9 0a       	sbc	r13, r25
+ 4f2:	ea 0a       	sbc	r14, r26
+ 4f4:	fb 0a       	sbc	r15, r27
+ 4f6:	21 97       	sbiw	r28, 0x01	; 1
 {
 	int32_t Uout;
 	int16_t i, k;
 	Uout = 0;
 	k = 1000;
 	for(i=0;i<k;i++){
- 4ce:	20 97       	sbiw	r28, 0x00	; 0
- 4d0:	49 f7       	brne	.-46     	; 0x4a4 <_Z21measure_vreg_inp_voltv+0x16>
+ 4f8:	20 97       	sbiw	r28, 0x00	; 0
+ 4fa:	49 f7       	brne	.-46     	; 0x4ce <_Z21measure_vreg_inp_voltv+0x16>
 		Uout += ADC_blocking_in(3);
 		Uout -= ADC_blocking_in(2);
 	}
 	Uout /= k;
- 4d2:	c7 01       	movw	r24, r14
- 4d4:	b6 01       	movw	r22, r12
- 4d6:	28 ee       	ldi	r18, 0xE8	; 232
- 4d8:	33 e0       	ldi	r19, 0x03	; 3
- 4da:	40 e0       	ldi	r20, 0x00	; 0
- 4dc:	50 e0       	ldi	r21, 0x00	; 0
- 4de:	27 d2       	rcall	.+1102   	; 0x92e <__divmodsi4>
+ 4fc:	c7 01       	movw	r24, r14
+ 4fe:	b6 01       	movw	r22, r12
+ 500:	28 ee       	ldi	r18, 0xE8	; 232
+ 502:	33 e0       	ldi	r19, 0x03	; 3
+ 504:	40 e0       	ldi	r20, 0x00	; 0
+ 506:	50 e0       	ldi	r21, 0x00	; 0
+ 508:	45 d2       	rcall	.+1162   	; 0x994 <__divmodsi4>
 	return Uout;
 }
- 4e0:	ca 01       	movw	r24, r20
- 4e2:	b9 01       	movw	r22, r18
- 4e4:	df 91       	pop	r29
- 4e6:	cf 91       	pop	r28
- 4e8:	ff 90       	pop	r15
- 4ea:	ef 90       	pop	r14
- 4ec:	df 90       	pop	r13
- 4ee:	cf 90       	pop	r12
- 4f0:	08 95       	ret
+ 50a:	ca 01       	movw	r24, r20
+ 50c:	b9 01       	movw	r22, r18
+ 50e:	df 91       	pop	r29
+ 510:	cf 91       	pop	r28
+ 512:	ff 90       	pop	r15
+ 514:	ef 90       	pop	r14
+ 516:	df 90       	pop	r13
+ 518:	cf 90       	pop	r12
+ 51a:	08 95       	ret
 
-000004f2 <_Z23measure_vreg_inout_voltv>:
+0000051c <_Z23measure_vreg_inout_voltv>:
 
 int32_t measure_vreg_inout_volt(void)
 {
- 4f2:	cf 92       	push	r12
- 4f4:	df 92       	push	r13
- 4f6:	ef 92       	push	r14
- 4f8:	ff 92       	push	r15
- 4fa:	cf 93       	push	r28
- 4fc:	df 93       	push	r29
- 4fe:	c8 ee       	ldi	r28, 0xE8	; 232
- 500:	d3 e0       	ldi	r29, 0x03	; 3
+ 51c:	cf 92       	push	r12
+ 51e:	df 92       	push	r13
+ 520:	ef 92       	push	r14
+ 522:	ff 92       	push	r15
+ 524:	cf 93       	push	r28
+ 526:	df 93       	push	r29
+ 528:	c8 ee       	ldi	r28, 0xE8	; 232
+ 52a:	d3 e0       	ldi	r29, 0x03	; 3
 	int32_t Uout;
 	int16_t i, k;
 	Uout = 0;
- 502:	c1 2c       	mov	r12, r1
- 504:	d1 2c       	mov	r13, r1
- 506:	76 01       	movw	r14, r12
+ 52c:	c1 2c       	mov	r12, r1
+ 52e:	d1 2c       	mov	r13, r1
+ 530:	76 01       	movw	r14, r12
 	k = 1000;
 	for(i=0;i<k;i++){
 		Uout += ADC_blocking_in(3);
- 508:	83 e0       	ldi	r24, 0x03	; 3
- 50a:	1a df       	rcall	.-460    	; 0x340 <_Z15ADC_blocking_ina>
- 50c:	aa 27       	eor	r26, r26
- 50e:	97 fd       	sbrc	r25, 7
- 510:	a0 95       	com	r26
- 512:	ba 2f       	mov	r27, r26
- 514:	c8 0e       	add	r12, r24
- 516:	d9 1e       	adc	r13, r25
- 518:	ea 1e       	adc	r14, r26
- 51a:	fb 1e       	adc	r15, r27
+ 532:	83 e0       	ldi	r24, 0x03	; 3
+ 534:	1a df       	rcall	.-460    	; 0x36a <_Z15ADC_blocking_ina>
+ 536:	aa 27       	eor	r26, r26
+ 538:	97 fd       	sbrc	r25, 7
+ 53a:	a0 95       	com	r26
+ 53c:	ba 2f       	mov	r27, r26
+ 53e:	c8 0e       	add	r12, r24
+ 540:	d9 1e       	adc	r13, r25
+ 542:	ea 1e       	adc	r14, r26
+ 544:	fb 1e       	adc	r15, r27
 		Uout -= ADC_blocking_in(1);
- 51c:	81 e0       	ldi	r24, 0x01	; 1
- 51e:	10 df       	rcall	.-480    	; 0x340 <_Z15ADC_blocking_ina>
- 520:	aa 27       	eor	r26, r26
- 522:	97 fd       	sbrc	r25, 7
- 524:	a0 95       	com	r26
- 526:	ba 2f       	mov	r27, r26
- 528:	c8 1a       	sub	r12, r24
- 52a:	d9 0a       	sbc	r13, r25
- 52c:	ea 0a       	sbc	r14, r26
- 52e:	fb 0a       	sbc	r15, r27
- 530:	21 97       	sbiw	r28, 0x01	; 1
+ 546:	81 e0       	ldi	r24, 0x01	; 1
+ 548:	10 df       	rcall	.-480    	; 0x36a <_Z15ADC_blocking_ina>
+ 54a:	aa 27       	eor	r26, r26
+ 54c:	97 fd       	sbrc	r25, 7
+ 54e:	a0 95       	com	r26
+ 550:	ba 2f       	mov	r27, r26
+ 552:	c8 1a       	sub	r12, r24
+ 554:	d9 0a       	sbc	r13, r25
+ 556:	ea 0a       	sbc	r14, r26
+ 558:	fb 0a       	sbc	r15, r27
+ 55a:	21 97       	sbiw	r28, 0x01	; 1
 {
 	int32_t Uout;
 	int16_t i, k;
 	Uout = 0;
 	k = 1000;
 	for(i=0;i<k;i++){
- 532:	20 97       	sbiw	r28, 0x00	; 0
- 534:	49 f7       	brne	.-46     	; 0x508 <_Z23measure_vreg_inout_voltv+0x16>
+ 55c:	20 97       	sbiw	r28, 0x00	; 0
+ 55e:	49 f7       	brne	.-46     	; 0x532 <_Z23measure_vreg_inout_voltv+0x16>
 		Uout += ADC_blocking_in(3);
 		Uout -= ADC_blocking_in(1);
 	}
 	Uout /= k;
- 536:	c7 01       	movw	r24, r14
- 538:	b6 01       	movw	r22, r12
- 53a:	28 ee       	ldi	r18, 0xE8	; 232
- 53c:	33 e0       	ldi	r19, 0x03	; 3
- 53e:	40 e0       	ldi	r20, 0x00	; 0
- 540:	50 e0       	ldi	r21, 0x00	; 0
- 542:	f5 d1       	rcall	.+1002   	; 0x92e <__divmodsi4>
+ 560:	c7 01       	movw	r24, r14
+ 562:	b6 01       	movw	r22, r12
+ 564:	28 ee       	ldi	r18, 0xE8	; 232
+ 566:	33 e0       	ldi	r19, 0x03	; 3
+ 568:	40 e0       	ldi	r20, 0x00	; 0
+ 56a:	50 e0       	ldi	r21, 0x00	; 0
+ 56c:	13 d2       	rcall	.+1062   	; 0x994 <__divmodsi4>
 	return Uout;
 }
- 544:	ca 01       	movw	r24, r20
- 546:	b9 01       	movw	r22, r18
- 548:	df 91       	pop	r29
- 54a:	cf 91       	pop	r28
- 54c:	ff 90       	pop	r15
- 54e:	ef 90       	pop	r14
- 550:	df 90       	pop	r13
- 552:	cf 90       	pop	r12
- 554:	08 95       	ret
+ 56e:	ca 01       	movw	r24, r20
+ 570:	b9 01       	movw	r22, r18
+ 572:	df 91       	pop	r29
+ 574:	cf 91       	pop	r28
+ 576:	ff 90       	pop	r15
+ 578:	ef 90       	pop	r14
+ 57a:	df 90       	pop	r13
+ 57c:	cf 90       	pop	r12
+ 57e:	08 95       	ret
 
-00000556 <_Z13start_step_upl>:
+00000580 <_Z13start_step_upl>:
 
 void start_step_up(int32_t Ucc)
 {
- 556:	9b 01       	movw	r18, r22
- 558:	ac 01       	movw	r20, r24
+ 580:	9b 01       	movw	r18, r22
+ 582:	ac 01       	movw	r20, r24
 	OCR0A = 70 * 200000/Ucc +132;
- 55a:	60 e8       	ldi	r22, 0x80	; 128
- 55c:	7f e9       	ldi	r23, 0x9F	; 159
- 55e:	85 ed       	ldi	r24, 0xD5	; 213
- 560:	90 e0       	ldi	r25, 0x00	; 0
- 562:	e5 d1       	rcall	.+970    	; 0x92e <__divmodsi4>
- 564:	2c 57       	subi	r18, 0x7C	; 124
- 566:	27 bd       	out	0x27, r18	; 39
- 568:	08 95       	ret
+ 584:	60 e8       	ldi	r22, 0x80	; 128
+ 586:	7f e9       	ldi	r23, 0x9F	; 159
+ 588:	85 ed       	ldi	r24, 0xD5	; 213
+ 58a:	90 e0       	ldi	r25, 0x00	; 0
+ 58c:	03 d2       	rcall	.+1030   	; 0x994 <__divmodsi4>
+ 58e:	2c 57       	subi	r18, 0x7C	; 124
+ 590:	27 bd       	out	0x27, r18	; 39
+ 592:	08 95       	ret
 
-0000056a <main>:
+00000594 <main>:
 {
 
-	int32_t Uout, Ci, Co, Ucc, Uin, Uinout;
+	int32_t Uout, Ci, Co, Ucc, Ustepup, Uin, Uinout;
 	int16_t i, k;
 
 	DDRD = 255;
- 56a:	8f ef       	ldi	r24, 0xFF	; 255
- 56c:	8a b9       	out	0x0a, r24	; 10
+ 594:	8f ef       	ldi	r24, 0xFF	; 255
+ 596:	8a b9       	out	0x0a, r24	; 10
 	DDRC = 1 << 5;
- 56e:	80 e2       	ldi	r24, 0x20	; 32
- 570:	87 b9       	out	0x07, r24	; 7
+ 598:	80 e2       	ldi	r24, 0x20	; 32
+ 59a:	87 b9       	out	0x07, r24	; 7
 	DDRB = 199;
- 572:	87 ec       	ldi	r24, 0xC7	; 199
- 574:	84 b9       	out	0x04, r24	; 4
+ 59c:	87 ec       	ldi	r24, 0xC7	; 199
+ 59e:	84 b9       	out	0x04, r24	; 4
 	PORTD = 1;
- 576:	81 e0       	ldi	r24, 0x01	; 1
- 578:	8b b9       	out	0x0b, r24	; 11
+ 5a0:	81 e0       	ldi	r24, 0x01	; 1
+ 5a2:	8b b9       	out	0x0b, r24	; 11
 	TCNT0 = 0;
- 57a:	16 bc       	out	0x26, r1	; 38
+ 5a4:	16 bc       	out	0x26, r1	; 38
 	OCR0A = 0; //192;
- 57c:	17 bc       	out	0x27, r1	; 39
+ 5a6:	17 bc       	out	0x27, r1	; 39
 	//OCR0A = 192;
 	TCCR0A = (1 << COM0A1) | (1 << WGM00) | (1 << WGM01);
- 57e:	93 e8       	ldi	r25, 0x83	; 131
- 580:	94 bd       	out	0x24, r25	; 36
+ 5a8:	93 e8       	ldi	r25, 0x83	; 131
+ 5aa:	94 bd       	out	0x24, r25	; 36
 	TCCR0B = (1 << CS00);
- 582:	85 bd       	out	0x25, r24	; 37
+ 5ac:	85 bd       	out	0x25, r24	; 37
 	TIMSK0 = (1 << TOIE0);
- 584:	80 93 6e 00 	sts	0x006E, r24
+ 5ae:	80 93 6e 00 	sts	0x006E, r24
 	
 	ADMUX = (1 << REFS1) | (1 << REFS0) | 1;
- 588:	81 ec       	ldi	r24, 0xC1	; 193
- 58a:	80 93 7c 00 	sts	0x007C, r24
+ 5b2:	81 ec       	ldi	r24, 0xC1	; 193
+ 5b4:	80 93 7c 00 	sts	0x007C, r24
 	ADCSRA = (1 << ADEN) | (1 << ADIE) | (1 << ADSC) | (1 << ADATE) | 7;
- 58e:	8f ee       	ldi	r24, 0xEF	; 239
- 590:	80 93 7a 00 	sts	0x007A, r24
+ 5b8:	8f ee       	ldi	r24, 0xEF	; 239
+ 5ba:	80 93 7a 00 	sts	0x007A, r24
 	ADCSRB = 0;
- 594:	10 92 7b 00 	sts	0x007B, r1
+ 5be:	10 92 7b 00 	sts	0x007B, r1
 	sei();
- 598:	78 94       	sei
+ 5c2:	78 94       	sei
   
   
 	PORTC = 0;
- 59a:	18 b8       	out	0x08, r1	; 8
+ 5c4:	18 b8       	out	0x08, r1	; 8
 	PORTD = 1+8;
- 59c:	89 e0       	ldi	r24, 0x09	; 9
- 59e:	8b b9       	out	0x0b, r24	; 11
+ 5c6:	89 e0       	ldi	r24, 0x09	; 9
+ 5c8:	8b b9       	out	0x0b, r24	; 11
 {
 	OCR0A = 0;
 }
 
 int main(void)
 {
- 5a0:	0f 2e       	mov	r0, r31
- 5a2:	f8 ee       	ldi	r31, 0xE8	; 232
- 5a4:	6f 2e       	mov	r6, r31
- 5a6:	f0 2d       	mov	r31, r0
- 5a8:	0f 2e       	mov	r0, r31
- 5aa:	f3 e0       	ldi	r31, 0x03	; 3
- 5ac:	7f 2e       	mov	r7, r31
- 5ae:	f0 2d       	mov	r31, r0
- 5b0:	81 2c       	mov	r8, r1
- 5b2:	91 2c       	mov	r9, r1
- 5b4:	a1 2c       	mov	r10, r1
- 5b6:	b1 2c       	mov	r11, r1
-			continue;
+ 5ca:	0f 2e       	mov	r0, r31
+ 5cc:	f8 ee       	ldi	r31, 0xE8	; 232
+ 5ce:	8f 2e       	mov	r8, r31
+ 5d0:	f0 2d       	mov	r31, r0
+ 5d2:	0f 2e       	mov	r0, r31
+ 5d4:	f3 e0       	ldi	r31, 0x03	; 3
+ 5d6:	9f 2e       	mov	r9, r31
+ 5d8:	f0 2d       	mov	r31, r0
+ 5da:	a1 2c       	mov	r10, r1
+ 5dc:	b1 2c       	mov	r11, r1
+ 5de:	00 e0       	ldi	r16, 0x00	; 0
+ 5e0:	10 e0       	ldi	r17, 0x00	; 0
+			leds_brd = 0;
 		}
 		
 		// capacity measurement
 		PORTD = (1 << 5) | (1 << 3);
 		PORTC = (1 << 5);
- 5b8:	0f 2e       	mov	r0, r31
- 5ba:	f4 e6       	ldi	r31, 0x64	; 100
- 5bc:	4f 2e       	mov	r4, r31
- 5be:	f0 2d       	mov	r31, r0
- 5c0:	51 2c       	mov	r5, r1
-		//if(leds_capo) leds = leds_capo;
-
-		//leds = leds_tmp;
-		PORTD = 0;
-		PORTC = 0;
-		start_step_up(Ucc);
- 5c2:	68 94       	set
- 5c4:	33 24       	eor	r3, r3
- 5c6:	34 f8       	bld	r3, 4
- 5c8:	0f 2e       	mov	r0, r31
- 5ca:	f7 e2       	ldi	r31, 0x27	; 39
- 5cc:	2f 2e       	mov	r2, r31
- 5ce:	f0 2d       	mov	r31, r0
-		if(Uinout > 870){
-			leds_zio = (1 << 10) | (1 << 13) | (1 << 14) | (1 << 6) | (1 << 8); // overvoltage protection not working, too high voltage
-		} else if(Uinout < 50) {
-			leds_zio = (1 << 11) | (1 << 13) | (1 << 6) | (1 << 8); // overvoltage protection diode short circuit
-		} else if(Uinout < 600){
-			leds_zio = (1 << 10) | (1 << 13) | (1 << 15) | (1 << 6) | (1 << 8); // overvoltage protection with too low breakdown voltage
- 5d0:	00 e4       	ldi	r16, 0x40	; 64
- 5d2:	15 ea       	ldi	r17, 0xA5	; 165
+ 5e2:	0f 2e       	mov	r0, r31
+ 5e4:	f4 e6       	ldi	r31, 0x64	; 100
+ 5e6:	2f 2e       	mov	r2, r31
+ 5e8:	f0 2d       	mov	r31, r0
+ 5ea:	31 2c       	mov	r3, r1
+		Uin = measure_vreg_inp_volt();
+		
+		if(Uin > 870){
+			leds_zi = (1 << 10) | (1 << 13) | (1 << 14) | (1 << 6); // overvoltage protection not working, too high voltage
+		} else if(Uin < 50) {
+			leds_zi = (1 << 11) | (1 << 13) | (1 << 6); // overvoltage protection diode short circuit
+ 5ec:	0f 2e       	mov	r0, r31
+ 5ee:	f0 e4       	ldi	r31, 0x40	; 64
+ 5f0:	4f 2e       	mov	r4, r31
+ 5f2:	f8 e2       	ldi	r31, 0x28	; 40
+ 5f4:	5f 2e       	mov	r5, r31
+ 5f6:	f0 2d       	mov	r31, r0
+		PORTD = (1 << 0) | (1 << 3);
+		for(i=0;i<1;i++) measure_vreg_inp_volt();
+		Uin = measure_vreg_inp_volt();
+		
+		if(Uin > 870){
+			leds_zi = (1 << 10) | (1 << 13) | (1 << 14) | (1 << 6); // overvoltage protection not working, too high voltage
+ 5f8:	0f 2e       	mov	r0, r31
+ 5fa:	f0 e4       	ldi	r31, 0x40	; 64
+ 5fc:	6f 2e       	mov	r6, r31
+ 5fe:	f4 e6       	ldi	r31, 0x64	; 100
+ 600:	7f 2e       	mov	r7, r31
+ 602:	f0 2d       	mov	r31, r0
 	
 	//while(1){}
   
     while(1)
     {
 		PORTD = (1 << 5) | (1 << 3);
- 5d4:	88 e2       	ldi	r24, 0x28	; 40
- 5d6:	8b b9       	out	0x0b, r24	; 11
+ 604:	88 e2       	ldi	r24, 0x28	; 40
+ 606:	8b b9       	out	0x0b, r24	; 11
 		PORTC = (1 << 5);
- 5d8:	80 e2       	ldi	r24, 0x20	; 32
- 5da:	88 b9       	out	0x08, r24	; 8
+ 608:	80 e2       	ldi	r24, 0x20	; 32
+ 60a:	88 b9       	out	0x08, r24	; 8
 		measure_vreg_outp_volt(); // wait
- 5dc:	26 df       	rcall	.-436    	; 0x42a <_Z22measure_vreg_outp_voltv>
+ 60c:	23 df       	rcall	.-442    	; 0x454 <_Z22measure_vreg_outp_voltv>
 		// check output voltage
 		PORTC = 0;
- 5de:	18 b8       	out	0x08, r1	; 8
+ 60e:	18 b8       	out	0x08, r1	; 8
 		PORTD = 1 + 8;
- 5e0:	89 e0       	ldi	r24, 0x09	; 9
- 5e2:	8b b9       	out	0x0b, r24	; 11
+ 610:	89 e0       	ldi	r24, 0x09	; 9
+ 612:	8b b9       	out	0x0b, r24	; 11
 		measure_vreg_outp_volt(); // dummy read/wait
- 5e4:	22 df       	rcall	.-444    	; 0x42a <_Z22measure_vreg_outp_voltv>
+ 614:	1f df       	rcall	.-450    	; 0x454 <_Z22measure_vreg_outp_voltv>
 		Uout = measure_vreg_outp_volt();
- 5e6:	21 df       	rcall	.-446    	; 0x42a <_Z22measure_vreg_outp_voltv>
- 5e8:	6b 01       	movw	r12, r22
- 5ea:	7c 01       	movw	r14, r24
+ 616:	1e df       	rcall	.-452    	; 0x454 <_Z22measure_vreg_outp_voltv>
+ 618:	6b 01       	movw	r12, r22
+ 61a:	7c 01       	movw	r14, r24
 		leds_v = ADC2LED(Uout);
- 5ec:	cb 01       	movw	r24, r22
- 5ee:	33 dd       	rcall	.-1434   	; 0x56 <_Z7ADC2LEDi>
- 5f0:	90 e0       	ldi	r25, 0x00	; 0
+ 61c:	cb 01       	movw	r24, r22
+ 61e:	1b dd       	rcall	.-1482   	; 0x56 <_Z7ADC2LEDi>
+ 620:	90 e0       	ldi	r25, 0x00	; 0
 		if(Uout > 150) {
- 5f2:	27 e9       	ldi	r18, 0x97	; 151
- 5f4:	c2 16       	cp	r12, r18
- 5f6:	d1 04       	cpc	r13, r1
- 5f8:	e1 04       	cpc	r14, r1
- 5fa:	f1 04       	cpc	r15, r1
- 5fc:	34 f0       	brlt	.+12     	; 0x60a <main+0xa0>
+ 622:	27 e9       	ldi	r18, 0x97	; 151
+ 624:	c2 16       	cp	r12, r18
+ 626:	d1 04       	cpc	r13, r1
+ 628:	e1 04       	cpc	r14, r1
+ 62a:	f1 04       	cpc	r15, r1
+ 62c:	34 f0       	brlt	.+12     	; 0x63a <main+0xa6>
 			leds_v |= (1 << 13) | (1 << 14) | (1 << 8);
- 5fe:	91 66       	ori	r25, 0x61	; 97
- 600:	90 93 01 01 	sts	0x0101, r25
- 604:	80 93 00 01 	sts	0x0100, r24
- 608:	8b c1       	rjmp	.+790    	; 0x920 <main+0x3b6>
+ 62e:	91 66       	ori	r25, 0x61	; 97
+ 630:	90 93 05 01 	sts	0x0105, r25
+ 634:	80 93 04 01 	sts	0x0104, r24
+ 638:	a6 c1       	rjmp	.+844    	; 0x986 <main+0x3f2>
 
 		} else if (Uout < 11) {
- 60a:	3b e0       	ldi	r19, 0x0B	; 11
- 60c:	c3 16       	cp	r12, r19
- 60e:	d1 04       	cpc	r13, r1
- 610:	e1 04       	cpc	r14, r1
- 612:	f1 04       	cpc	r15, r1
- 614:	0c f0       	brlt	.+2      	; 0x618 <main+0xae>
- 616:	80 c1       	rjmp	.+768    	; 0x918 <main+0x3ae>
+ 63a:	3b e0       	ldi	r19, 0x0B	; 11
+ 63c:	c3 16       	cp	r12, r19
+ 63e:	d1 04       	cpc	r13, r1
+ 640:	e1 04       	cpc	r14, r1
+ 642:	f1 04       	cpc	r15, r1
+ 644:	0c f0       	brlt	.+2      	; 0x648 <main+0xb4>
+ 646:	9b c1       	rjmp	.+822    	; 0x97e <main+0x3ea>
 			leds_v |= (1 << 13) | (1 << 15) | (1 << 8);
- 618:	91 6a       	ori	r25, 0xA1	; 161
- 61a:	90 93 01 01 	sts	0x0101, r25
- 61e:	80 93 00 01 	sts	0x0100, r24
- 622:	7e c1       	rjmp	.+764    	; 0x920 <main+0x3b6>
+ 648:	91 6a       	ori	r25, 0xA1	; 161
+ 64a:	90 93 05 01 	sts	0x0105, r25
+ 64e:	80 93 04 01 	sts	0x0104, r24
+ 652:	99 c1       	rjmp	.+818    	; 0x986 <main+0x3f2>
 		// check input capacity - reverse (!), regulator and output cap off 
 		// get supply voltage for capacity measurement
 		Ucc = 0;
 		k = 1000;
 		for(i=0;i<k;i++){
 			Ucc += ADC_blocking_in(0);
- 624:	80 e0       	ldi	r24, 0x00	; 0
- 626:	8c de       	rcall	.-744    	; 0x340 <_Z15ADC_blocking_ina>
- 628:	aa 27       	eor	r26, r26
- 62a:	97 fd       	sbrc	r25, 7
- 62c:	a0 95       	com	r26
- 62e:	ba 2f       	mov	r27, r26
- 630:	c8 0e       	add	r12, r24
- 632:	d9 1e       	adc	r13, r25
- 634:	ea 1e       	adc	r14, r26
- 636:	fb 1e       	adc	r15, r27
- 638:	21 97       	sbiw	r28, 0x01	; 1
+ 654:	80 e0       	ldi	r24, 0x00	; 0
+ 656:	89 de       	rcall	.-750    	; 0x36a <_Z15ADC_blocking_ina>
+ 658:	aa 27       	eor	r26, r26
+ 65a:	97 fd       	sbrc	r25, 7
+ 65c:	a0 95       	com	r26
+ 65e:	ba 2f       	mov	r27, r26
+ 660:	c8 0e       	add	r12, r24
+ 662:	d9 1e       	adc	r13, r25
+ 664:	ea 1e       	adc	r14, r26
+ 666:	fb 1e       	adc	r15, r27
+ 668:	21 97       	sbiw	r28, 0x01	; 1
 		
 		// check input capacity - reverse (!), regulator and output cap off 
 		// get supply voltage for capacity measurement
 		Ucc = 0;
 		k = 1000;
 		for(i=0;i<k;i++){
- 63a:	20 97       	sbiw	r28, 0x00	; 0
- 63c:	99 f7       	brne	.-26     	; 0x624 <main+0xba>
+ 66a:	20 97       	sbiw	r28, 0x00	; 0
+ 66c:	99 f7       	brne	.-26     	; 0x654 <main+0xc0>
 			Ucc += ADC_blocking_in(0);
 		}
 		if(Ucc < 200000){
- 63e:	40 e4       	ldi	r20, 0x40	; 64
- 640:	c4 16       	cp	r12, r20
- 642:	4d e0       	ldi	r20, 0x0D	; 13
- 644:	d4 06       	cpc	r13, r20
- 646:	43 e0       	ldi	r20, 0x03	; 3
- 648:	e4 06       	cpc	r14, r20
- 64a:	f1 04       	cpc	r15, r1
- 64c:	74 f4       	brge	.+28     	; 0x66a <main+0x100>
-			leds_tmp |= (1 << 13) | (1 << 15);
- 64e:	80 91 0e 01 	lds	r24, 0x010E
- 652:	90 91 0f 01 	lds	r25, 0x010F
- 656:	90 6a       	ori	r25, 0xA0	; 160
- 658:	90 93 0f 01 	sts	0x010F, r25
- 65c:	80 93 0e 01 	sts	0x010E, r24
-			leds = leds_tmp;
- 660:	90 93 16 01 	sts	0x0116, r25
- 664:	80 93 15 01 	sts	0x0115, r24
+ 66e:	40 e4       	ldi	r20, 0x40	; 64
+ 670:	c4 16       	cp	r12, r20
+ 672:	4d e0       	ldi	r20, 0x0D	; 13
+ 674:	d4 06       	cpc	r13, r20
+ 676:	43 e0       	ldi	r20, 0x03	; 3
+ 678:	e4 06       	cpc	r14, r20
+ 67a:	f1 04       	cpc	r15, r1
+ 67c:	5c f4       	brge	.+22     	; 0x694 <main+0x100>
+			leds_brd = (1 << 13) | (1 << 15);
+ 67e:	80 e0       	ldi	r24, 0x00	; 0
+ 680:	90 ea       	ldi	r25, 0xA0	; 160
+ 682:	90 93 03 01 	sts	0x0103, r25
+ 686:	80 93 02 01 	sts	0x0102, r24
+			leds = leds_brd;
+ 68a:	90 93 1a 01 	sts	0x011A, r25
+ 68e:	80 93 19 01 	sts	0x0119, r24
 			continue;
- 668:	b5 cf       	rjmp	.-150    	; 0x5d4 <main+0x6a>
+ 692:	b8 cf       	rjmp	.-144    	; 0x604 <main+0x70>
 		} else if(Ucc > 250000){
- 66a:	51 e9       	ldi	r21, 0x91	; 145
- 66c:	c5 16       	cp	r12, r21
- 66e:	50 ed       	ldi	r21, 0xD0	; 208
- 670:	d5 06       	cpc	r13, r21
- 672:	53 e0       	ldi	r21, 0x03	; 3
- 674:	e5 06       	cpc	r14, r21
- 676:	f1 04       	cpc	r15, r1
- 678:	74 f0       	brlt	.+28     	; 0x696 <main+0x12c>
-			leds_tmp |= (1 << 13) | (1 << 14);
- 67a:	80 91 0e 01 	lds	r24, 0x010E
- 67e:	90 91 0f 01 	lds	r25, 0x010F
- 682:	90 66       	ori	r25, 0x60	; 96
- 684:	90 93 0f 01 	sts	0x010F, r25
- 688:	80 93 0e 01 	sts	0x010E, r24
-			leds = leds_tmp;
- 68c:	90 93 16 01 	sts	0x0116, r25
- 690:	80 93 15 01 	sts	0x0115, r24
+ 694:	51 e9       	ldi	r21, 0x91	; 145
+ 696:	c5 16       	cp	r12, r21
+ 698:	50 ed       	ldi	r21, 0xD0	; 208
+ 69a:	d5 06       	cpc	r13, r21
+ 69c:	53 e0       	ldi	r21, 0x03	; 3
+ 69e:	e5 06       	cpc	r14, r21
+ 6a0:	f1 04       	cpc	r15, r1
+ 6a2:	5c f0       	brlt	.+22     	; 0x6ba <main+0x126>
+			leds_brd = (1 << 13) | (1 << 14);
+ 6a4:	80 e0       	ldi	r24, 0x00	; 0
+ 6a6:	90 e6       	ldi	r25, 0x60	; 96
+ 6a8:	90 93 03 01 	sts	0x0103, r25
+ 6ac:	80 93 02 01 	sts	0x0102, r24
+			leds = leds_brd;
+ 6b0:	90 93 1a 01 	sts	0x011A, r25
+ 6b4:	80 93 19 01 	sts	0x0119, r24
 			continue;
- 694:	9f cf       	rjmp	.-194    	; 0x5d4 <main+0x6a>
+ 6b8:	a5 cf       	rjmp	.-182    	; 0x604 <main+0x70>
+		} else {
+			leds_brd = 0;
+ 6ba:	10 92 03 01 	sts	0x0103, r1
+ 6be:	10 92 02 01 	sts	0x0102, r1
 		}
 		
 		// capacity measurement
 		PORTD = (1 << 5) | (1 << 3);
- 696:	88 e2       	ldi	r24, 0x28	; 40
- 698:	8b b9       	out	0x0b, r24	; 11
+ 6c2:	88 e2       	ldi	r24, 0x28	; 40
+ 6c4:	8b b9       	out	0x0b, r24	; 11
 		PORTC = (1 << 5);
- 69a:	80 e2       	ldi	r24, 0x20	; 32
- 69c:	88 b9       	out	0x08, r24	; 8
- 69e:	84 2d       	mov	r24, r4
- 6a0:	95 2d       	mov	r25, r5
- 6a2:	01 97       	sbiw	r24, 0x01	; 1
+ 6c6:	80 e2       	ldi	r24, 0x20	; 32
+ 6c8:	88 b9       	out	0x08, r24	; 8
+ 6ca:	82 2d       	mov	r24, r2
+ 6cc:	93 2d       	mov	r25, r3
+ 6ce:	01 97       	sbiw	r24, 0x01	; 1
 		for(i=0;i<100;i++);
- 6a4:	00 97       	sbiw	r24, 0x00	; 0
- 6a6:	e9 f7       	brne	.-6      	; 0x6a2 <main+0x138>
+ 6d0:	00 97       	sbiw	r24, 0x00	; 0
+ 6d2:	e9 f7       	brne	.-6      	; 0x6ce <main+0x13a>
 		PORTD = (1 << 2);
- 6a8:	84 e0       	ldi	r24, 0x04	; 4
- 6aa:	8b b9       	out	0x0b, r24	; 11
+ 6d4:	84 e0       	ldi	r24, 0x04	; 4
+ 6d6:	8b b9       	out	0x0b, r24	; 11
 		Ci = CAP_blocking_in(3, Ucc);
- 6ac:	b7 01       	movw	r22, r14
- 6ae:	a6 01       	movw	r20, r12
- 6b0:	83 e0       	ldi	r24, 0x03	; 3
- 6b2:	5d de       	rcall	.-838    	; 0x36e <_Z15CAP_blocking_inal>
+ 6d8:	b7 01       	movw	r22, r14
+ 6da:	a6 01       	movw	r20, r12
+ 6dc:	83 e0       	ldi	r24, 0x03	; 3
+ 6de:	5c de       	rcall	.-840    	; 0x398 <_Z15CAP_blocking_inal>
 		
 		if(Ci > 1500){
- 6b4:	6d 3d       	cpi	r22, 0xDD	; 221
- 6b6:	25 e0       	ldi	r18, 0x05	; 5
- 6b8:	72 07       	cpc	r23, r18
- 6ba:	81 05       	cpc	r24, r1
- 6bc:	91 05       	cpc	r25, r1
- 6be:	3c f0       	brlt	.+14     	; 0x6ce <main+0x164>
+ 6e0:	6d 3d       	cpi	r22, 0xDD	; 221
+ 6e2:	25 e0       	ldi	r18, 0x05	; 5
+ 6e4:	72 07       	cpc	r23, r18
+ 6e6:	81 05       	cpc	r24, r1
+ 6e8:	91 05       	cpc	r25, r1
+ 6ea:	3c f0       	brlt	.+14     	; 0x6fa <main+0x166>
 			leds_capi = (1 << 9) | (1 << 7) | (1 << 6) | (1 << 13) | (1 << 14);
- 6c0:	80 ec       	ldi	r24, 0xC0	; 192
- 6c2:	92 e6       	ldi	r25, 0x62	; 98
- 6c4:	90 93 0d 01 	sts	0x010D, r25
- 6c8:	80 93 0c 01 	sts	0x010C, r24
- 6cc:	10 c0       	rjmp	.+32     	; 0x6ee <main+0x184>
+ 6ec:	80 ec       	ldi	r24, 0xC0	; 192
+ 6ee:	92 e6       	ldi	r25, 0x62	; 98
+ 6f0:	90 93 11 01 	sts	0x0111, r25
+ 6f4:	80 93 10 01 	sts	0x0110, r24
+ 6f8:	10 c0       	rjmp	.+32     	; 0x71a <main+0x186>
 		} else if(Ci < 500){
- 6ce:	64 3f       	cpi	r22, 0xF4	; 244
- 6d0:	71 40       	sbci	r23, 0x01	; 1
- 6d2:	81 05       	cpc	r24, r1
- 6d4:	91 05       	cpc	r25, r1
- 6d6:	3c f4       	brge	.+14     	; 0x6e6 <main+0x17c>
+ 6fa:	64 3f       	cpi	r22, 0xF4	; 244
+ 6fc:	71 40       	sbci	r23, 0x01	; 1
+ 6fe:	81 05       	cpc	r24, r1
+ 700:	91 05       	cpc	r25, r1
+ 702:	3c f4       	brge	.+14     	; 0x712 <main+0x17e>
 			leds_capi = (1 << 9) | (1 << 7) | (1 << 6) | (1 << 13) | (1 << 15);
- 6d8:	80 ec       	ldi	r24, 0xC0	; 192
- 6da:	92 ea       	ldi	r25, 0xA2	; 162
- 6dc:	90 93 0d 01 	sts	0x010D, r25
- 6e0:	80 93 0c 01 	sts	0x010C, r24
- 6e4:	04 c0       	rjmp	.+8      	; 0x6ee <main+0x184>
+ 704:	80 ec       	ldi	r24, 0xC0	; 192
+ 706:	92 ea       	ldi	r25, 0xA2	; 162
+ 708:	90 93 11 01 	sts	0x0111, r25
+ 70c:	80 93 10 01 	sts	0x0110, r24
+ 710:	04 c0       	rjmp	.+8      	; 0x71a <main+0x186>
 		}else{
 			leds_capi = 0;
- 6e6:	10 92 0d 01 	sts	0x010D, r1
- 6ea:	10 92 0c 01 	sts	0x010C, r1
+ 712:	10 92 11 01 	sts	0x0111, r1
+ 716:	10 92 10 01 	sts	0x0110, r1
 		}
 		//if(leds_capi) leds = leds_capi;
 		PORTD = (1 << 5) | (1 << 3);
- 6ee:	88 e2       	ldi	r24, 0x28	; 40
- 6f0:	8b b9       	out	0x0b, r24	; 11
+ 71a:	88 e2       	ldi	r24, 0x28	; 40
+ 71c:	8b b9       	out	0x0b, r24	; 11
 		PORTC = (1 << 5);
- 6f2:	80 e2       	ldi	r24, 0x20	; 32
- 6f4:	88 b9       	out	0x08, r24	; 8
- 6f6:	84 2d       	mov	r24, r4
- 6f8:	95 2d       	mov	r25, r5
- 6fa:	01 97       	sbiw	r24, 0x01	; 1
+ 71e:	80 e2       	ldi	r24, 0x20	; 32
+ 720:	88 b9       	out	0x08, r24	; 8
+ 722:	82 2d       	mov	r24, r2
+ 724:	93 2d       	mov	r25, r3
+ 726:	01 97       	sbiw	r24, 0x01	; 1
 		for(i=0;i<100;i++);
- 6fc:	00 97       	sbiw	r24, 0x00	; 0
- 6fe:	e9 f7       	brne	.-6      	; 0x6fa <main+0x190>
+ 728:	00 97       	sbiw	r24, 0x00	; 0
+ 72a:	e9 f7       	brne	.-6      	; 0x726 <main+0x192>
 		PORTC = 0;
- 700:	18 b8       	out	0x08, r1	; 8
+ 72c:	18 b8       	out	0x08, r1	; 8
 		PORTD = (1 << 2) | (1 << 5);
- 702:	84 e2       	ldi	r24, 0x24	; 36
- 704:	8b b9       	out	0x0b, r24	; 11
+ 72e:	84 e2       	ldi	r24, 0x24	; 36
+ 730:	8b b9       	out	0x0b, r24	; 11
 		Co = CAP_blocking_in(1, Ucc);
- 706:	b7 01       	movw	r22, r14
- 708:	a6 01       	movw	r20, r12
- 70a:	81 e0       	ldi	r24, 0x01	; 1
- 70c:	30 de       	rcall	.-928    	; 0x36e <_Z15CAP_blocking_inal>
+ 732:	b7 01       	movw	r22, r14
+ 734:	a6 01       	movw	r20, r12
+ 736:	81 e0       	ldi	r24, 0x01	; 1
+ 738:	2f de       	rcall	.-930    	; 0x398 <_Z15CAP_blocking_inal>
 		leds_capo = 0;
 		if(Co > 15000){
- 70e:	69 39       	cpi	r22, 0x99	; 153
- 710:	4a e3       	ldi	r20, 0x3A	; 58
- 712:	74 07       	cpc	r23, r20
- 714:	81 05       	cpc	r24, r1
- 716:	91 05       	cpc	r25, r1
- 718:	3c f0       	brlt	.+14     	; 0x728 <main+0x1be>
+ 73a:	69 39       	cpi	r22, 0x99	; 153
+ 73c:	4a e3       	ldi	r20, 0x3A	; 58
+ 73e:	74 07       	cpc	r23, r20
+ 740:	81 05       	cpc	r24, r1
+ 742:	91 05       	cpc	r25, r1
+ 744:	3c f0       	brlt	.+14     	; 0x754 <main+0x1c0>
 			leds_capo |= (1 << 9) | (1 << 7) | (1 << 8) | (1 << 13) | (1 << 14);
- 71a:	80 e8       	ldi	r24, 0x80	; 128
- 71c:	93 e6       	ldi	r25, 0x63	; 99
- 71e:	90 93 0b 01 	sts	0x010B, r25
- 722:	80 93 0a 01 	sts	0x010A, r24
- 726:	10 c0       	rjmp	.+32     	; 0x748 <main+0x1de>
+ 746:	80 e8       	ldi	r24, 0x80	; 128
+ 748:	93 e6       	ldi	r25, 0x63	; 99
+ 74a:	90 93 0f 01 	sts	0x010F, r25
+ 74e:	80 93 0e 01 	sts	0x010E, r24
+ 752:	10 c0       	rjmp	.+32     	; 0x774 <main+0x1e0>
 		} else if(Co < 5000){
- 728:	68 38       	cpi	r22, 0x88	; 136
- 72a:	73 41       	sbci	r23, 0x13	; 19
- 72c:	81 05       	cpc	r24, r1
- 72e:	91 05       	cpc	r25, r1
- 730:	2c f0       	brlt	.+10     	; 0x73c <main+0x1d2>
+ 754:	68 38       	cpi	r22, 0x88	; 136
+ 756:	73 41       	sbci	r23, 0x13	; 19
+ 758:	81 05       	cpc	r24, r1
+ 75a:	91 05       	cpc	r25, r1
+ 75c:	2c f0       	brlt	.+10     	; 0x768 <main+0x1d4>
 		PORTC = (1 << 5);
 		for(i=0;i<100;i++);
 		PORTC = 0;
 		PORTD = (1 << 2) | (1 << 5);
 		Co = CAP_blocking_in(1, Ucc);
 		leds_capo = 0;
- 732:	10 92 0b 01 	sts	0x010B, r1
- 736:	10 92 0a 01 	sts	0x010A, r1
- 73a:	06 c0       	rjmp	.+12     	; 0x748 <main+0x1de>
+ 75e:	10 92 0f 01 	sts	0x010F, r1
+ 762:	10 92 0e 01 	sts	0x010E, r1
+ 766:	06 c0       	rjmp	.+12     	; 0x774 <main+0x1e0>
 		if(Co > 15000){
 			leds_capo |= (1 << 9) | (1 << 7) | (1 << 8) | (1 << 13) | (1 << 14);
 		} else if(Co < 5000){
 			leds_capo |= (1 << 9) | (1 << 7) | (1 << 8) | (1 << 13) | (1 << 15);
- 73c:	80 e8       	ldi	r24, 0x80	; 128
- 73e:	93 ea       	ldi	r25, 0xA3	; 163
- 740:	90 93 0b 01 	sts	0x010B, r25
- 744:	80 93 0a 01 	sts	0x010A, r24
+ 768:	80 e8       	ldi	r24, 0x80	; 128
+ 76a:	93 ea       	ldi	r25, 0xA3	; 163
+ 76c:	90 93 0f 01 	sts	0x010F, r25
+ 770:	80 93 0e 01 	sts	0x010E, r24
 		}
 		//if(leds_capo) leds = leds_capo;
 
 		//leds = leds_tmp;
 		PORTD = 0;
- 748:	1b b8       	out	0x0b, r1	; 11
+ 774:	1b b8       	out	0x0b, r1	; 11
 		PORTC = 0;
- 74a:	18 b8       	out	0x08, r1	; 8
+ 776:	18 b8       	out	0x08, r1	; 8
 		start_step_up(Ucc);
- 74c:	c7 01       	movw	r24, r14
- 74e:	b6 01       	movw	r22, r12
- 750:	02 df       	rcall	.-508    	; 0x556 <_Z13start_step_upl>
- 752:	83 2d       	mov	r24, r3
- 754:	92 2d       	mov	r25, r2
- 756:	01 97       	sbiw	r24, 0x01	; 1
+ 778:	c7 01       	movw	r24, r14
+ 77a:	b6 01       	movw	r22, r12
+ 77c:	01 df       	rcall	.-510    	; 0x580 <_Z13start_step_upl>
+ 77e:	80 e1       	ldi	r24, 0x10	; 16
+ 780:	97 e2       	ldi	r25, 0x27	; 39
+ 782:	01 97       	sbiw	r24, 0x01	; 1
 		for(i=0;i<10000;i++);
- 758:	00 97       	sbiw	r24, 0x00	; 0
- 75a:	e9 f7       	brne	.-6      	; 0x756 <main+0x1ec>
+ 784:	00 97       	sbiw	r24, 0x00	; 0
+ 786:	e9 f7       	brne	.-6      	; 0x782 <main+0x1ee>
+ 788:	c8 2d       	mov	r28, r8
+ 78a:	d9 2d       	mov	r29, r9
+ 78c:	ca 2c       	mov	r12, r10
+ 78e:	db 2c       	mov	r13, r11
+ 790:	e0 2e       	mov	r14, r16
+ 792:	f1 2e       	mov	r15, r17
+		// check stepup
+		Ustepup = 0;
+		k = 1000;
+		for(i=0;i<k;i++){
+			Ustepup += ADC_blocking_in(0);
+ 794:	80 e0       	ldi	r24, 0x00	; 0
+ 796:	e9 dd       	rcall	.-1070   	; 0x36a <_Z15ADC_blocking_ina>
+ 798:	aa 27       	eor	r26, r26
+ 79a:	97 fd       	sbrc	r25, 7
+ 79c:	a0 95       	com	r26
+ 79e:	ba 2f       	mov	r27, r26
+ 7a0:	c8 0e       	add	r12, r24
+ 7a2:	d9 1e       	adc	r13, r25
+ 7a4:	ea 1e       	adc	r14, r26
+ 7a6:	fb 1e       	adc	r15, r27
+ 7a8:	21 97       	sbiw	r28, 0x01	; 1
+		start_step_up(Ucc);
+		for(i=0;i<10000;i++);
+		// check stepup
+		Ustepup = 0;
+		k = 1000;
+		for(i=0;i<k;i++){
+ 7aa:	20 97       	sbiw	r28, 0x00	; 0
+ 7ac:	99 f7       	brne	.-26     	; 0x794 <main+0x200>
+			Ustepup += ADC_blocking_in(0);
+		}
+		Ustepup /= k;
+		if(Ustepup < 910){
+ 7ae:	20 eb       	ldi	r18, 0xB0	; 176
+ 7b0:	c2 16       	cp	r12, r18
+ 7b2:	22 ee       	ldi	r18, 0xE2	; 226
+ 7b4:	d2 06       	cpc	r13, r18
+ 7b6:	2d e0       	ldi	r18, 0x0D	; 13
+ 7b8:	e2 06       	cpc	r14, r18
+ 7ba:	f1 04       	cpc	r15, r1
+ 7bc:	5c f4       	brge	.+22     	; 0x7d4 <main+0x240>
+			leds_brd_su = (1 << 13);
+ 7be:	80 e0       	ldi	r24, 0x00	; 0
+ 7c0:	90 e2       	ldi	r25, 0x20	; 32
+ 7c2:	90 93 01 01 	sts	0x0101, r25
+ 7c6:	80 93 00 01 	sts	0x0100, r24
+			leds = leds_brd_su;
+ 7ca:	90 93 1a 01 	sts	0x011A, r25
+ 7ce:	80 93 19 01 	sts	0x0119, r24
+ 7d2:	04 c0       	rjmp	.+8      	; 0x7dc <main+0x248>
+		}else{
+			leds_brd_su = 0;
+ 7d4:	10 92 01 01 	sts	0x0101, r1
+ 7d8:	10 92 00 01 	sts	0x0100, r1
+		}
 		// output z-diode
 		PORTD = (1 << 4) | (1 << 3);
- 75c:	88 e1       	ldi	r24, 0x18	; 24
- 75e:	8b b9       	out	0x0b, r24	; 11
+ 7dc:	88 e1       	ldi	r24, 0x18	; 24
+ 7de:	8b b9       	out	0x0b, r24	; 11
 		for(i=0;i<1;i++) measure_vreg_outp_volt();
- 760:	64 de       	rcall	.-824    	; 0x42a <_Z22measure_vreg_outp_voltv>
+ 7e0:	39 de       	rcall	.-910    	; 0x454 <_Z22measure_vreg_outp_voltv>
 		Uout = measure_vreg_outp_volt();
- 762:	63 de       	rcall	.-826    	; 0x42a <_Z22measure_vreg_outp_voltv>
+ 7e2:	38 de       	rcall	.-912    	; 0x454 <_Z22measure_vreg_outp_voltv>
 		if(Uout > 870){
- 764:	67 36       	cpi	r22, 0x67	; 103
- 766:	23 e0       	ldi	r18, 0x03	; 3
- 768:	72 07       	cpc	r23, r18
- 76a:	81 05       	cpc	r24, r1
- 76c:	91 05       	cpc	r25, r1
- 76e:	54 f0       	brlt	.+20     	; 0x784 <main+0x21a>
+ 7e4:	67 36       	cpi	r22, 0x67	; 103
+ 7e6:	33 e0       	ldi	r19, 0x03	; 3
+ 7e8:	73 07       	cpc	r23, r19
+ 7ea:	81 05       	cpc	r24, r1
+ 7ec:	91 05       	cpc	r25, r1
+ 7ee:	54 f0       	brlt	.+20     	; 0x804 <main+0x270>
 			leds_zo |= (1 << 10) | (1 << 13) | (1 << 14) | (1 << 8); // overvoltage protection not working, too high voltage
- 770:	80 91 06 01 	lds	r24, 0x0106
- 774:	90 91 07 01 	lds	r25, 0x0107
- 778:	95 66       	ori	r25, 0x65	; 101
- 77a:	90 93 07 01 	sts	0x0107, r25
- 77e:	80 93 06 01 	sts	0x0106, r24
- 782:	22 c0       	rjmp	.+68     	; 0x7c8 <main+0x25e>
+ 7f0:	80 91 0a 01 	lds	r24, 0x010A
+ 7f4:	90 91 0b 01 	lds	r25, 0x010B
+ 7f8:	95 66       	ori	r25, 0x65	; 101
+ 7fa:	90 93 0b 01 	sts	0x010B, r25
+ 7fe:	80 93 0a 01 	sts	0x010A, r24
+ 802:	22 c0       	rjmp	.+68     	; 0x848 <main+0x2b4>
 		} else if(Uout < 50) {
- 784:	62 33       	cpi	r22, 0x32	; 50
- 786:	71 05       	cpc	r23, r1
- 788:	81 05       	cpc	r24, r1
- 78a:	91 05       	cpc	r25, r1
- 78c:	54 f4       	brge	.+20     	; 0x7a2 <main+0x238>
+ 804:	62 33       	cpi	r22, 0x32	; 50
+ 806:	71 05       	cpc	r23, r1
+ 808:	81 05       	cpc	r24, r1
+ 80a:	91 05       	cpc	r25, r1
+ 80c:	54 f4       	brge	.+20     	; 0x822 <main+0x28e>
 			leds_zo |= (1 << 11) | (1 << 13) | (1 << 8); // overvoltage protection diode short circuit
- 78e:	80 91 06 01 	lds	r24, 0x0106
- 792:	90 91 07 01 	lds	r25, 0x0107
- 796:	99 62       	ori	r25, 0x29	; 41
- 798:	90 93 07 01 	sts	0x0107, r25
- 79c:	80 93 06 01 	sts	0x0106, r24
- 7a0:	13 c0       	rjmp	.+38     	; 0x7c8 <main+0x25e>
+ 80e:	80 91 0a 01 	lds	r24, 0x010A
+ 812:	90 91 0b 01 	lds	r25, 0x010B
+ 816:	99 62       	ori	r25, 0x29	; 41
+ 818:	90 93 0b 01 	sts	0x010B, r25
+ 81c:	80 93 0a 01 	sts	0x010A, r24
+ 820:	13 c0       	rjmp	.+38     	; 0x848 <main+0x2b4>
 		} else if(Uout < 600){
- 7a2:	68 35       	cpi	r22, 0x58	; 88
- 7a4:	72 40       	sbci	r23, 0x02	; 2
- 7a6:	81 05       	cpc	r24, r1
- 7a8:	91 05       	cpc	r25, r1
- 7aa:	54 f4       	brge	.+20     	; 0x7c0 <main+0x256>
+ 822:	68 35       	cpi	r22, 0x58	; 88
+ 824:	72 40       	sbci	r23, 0x02	; 2
+ 826:	81 05       	cpc	r24, r1
+ 828:	91 05       	cpc	r25, r1
+ 82a:	54 f4       	brge	.+20     	; 0x840 <main+0x2ac>
 			leds_zo |= (1 << 10) | (1 << 13) | (1 << 15) | (1 << 8); // overvoltage protection with too low breakdown voltage
- 7ac:	80 91 06 01 	lds	r24, 0x0106
- 7b0:	90 91 07 01 	lds	r25, 0x0107
- 7b4:	95 6a       	ori	r25, 0xA5	; 165
- 7b6:	90 93 07 01 	sts	0x0107, r25
- 7ba:	80 93 06 01 	sts	0x0106, r24
- 7be:	04 c0       	rjmp	.+8      	; 0x7c8 <main+0x25e>
+ 82c:	80 91 0a 01 	lds	r24, 0x010A
+ 830:	90 91 0b 01 	lds	r25, 0x010B
+ 834:	95 6a       	ori	r25, 0xA5	; 165
+ 836:	90 93 0b 01 	sts	0x010B, r25
+ 83a:	80 93 0a 01 	sts	0x010A, r24
+ 83e:	04 c0       	rjmp	.+8      	; 0x848 <main+0x2b4>
 		} else {
 			leds_zo = 0;
- 7c0:	10 92 07 01 	sts	0x0107, r1
- 7c4:	10 92 06 01 	sts	0x0106, r1
+ 840:	10 92 0b 01 	sts	0x010B, r1
+ 844:	10 92 0a 01 	sts	0x010A, r1
 		}
 		// input z-diode
 		PORTD = (1 << 0) | (1 << 3);
- 7c8:	89 e0       	ldi	r24, 0x09	; 9
- 7ca:	8b b9       	out	0x0b, r24	; 11
+ 848:	89 e0       	ldi	r24, 0x09	; 9
+ 84a:	8b b9       	out	0x0b, r24	; 11
 		for(i=0;i<1;i++) measure_vreg_inp_volt();
- 7cc:	60 de       	rcall	.-832    	; 0x48e <_Z21measure_vreg_inp_voltv>
+ 84c:	35 de       	rcall	.-918    	; 0x4b8 <_Z21measure_vreg_inp_voltv>
 		Uin = measure_vreg_inp_volt();
- 7ce:	5f de       	rcall	.-834    	; 0x48e <_Z21measure_vreg_inp_voltv>
+ 84e:	34 de       	rcall	.-920    	; 0x4b8 <_Z21measure_vreg_inp_voltv>
 		
 		if(Uin > 870){
- 7d0:	67 36       	cpi	r22, 0x67	; 103
- 7d2:	43 e0       	ldi	r20, 0x03	; 3
- 7d4:	74 07       	cpc	r23, r20
- 7d6:	81 05       	cpc	r24, r1
- 7d8:	91 05       	cpc	r25, r1
- 7da:	3c f0       	brlt	.+14     	; 0x7ea <main+0x280>
+ 850:	67 36       	cpi	r22, 0x67	; 103
+ 852:	53 e0       	ldi	r21, 0x03	; 3
+ 854:	75 07       	cpc	r23, r21
+ 856:	81 05       	cpc	r24, r1
+ 858:	91 05       	cpc	r25, r1
+ 85a:	2c f0       	brlt	.+10     	; 0x866 <main+0x2d2>
 			leds_zi = (1 << 10) | (1 << 13) | (1 << 14) | (1 << 6); // overvoltage protection not working, too high voltage
- 7dc:	80 e4       	ldi	r24, 0x40	; 64
- 7de:	94 e6       	ldi	r25, 0x64	; 100
- 7e0:	90 93 09 01 	sts	0x0109, r25
- 7e4:	80 93 08 01 	sts	0x0108, r24
- 7e8:	1c c0       	rjmp	.+56     	; 0x822 <main+0x2b8>
+ 85c:	70 92 0d 01 	sts	0x010D, r7
+ 860:	60 92 0c 01 	sts	0x010C, r6
+ 864:	1a c0       	rjmp	.+52     	; 0x89a <main+0x306>
 		} else if(Uin < 50) {
- 7ea:	62 33       	cpi	r22, 0x32	; 50
- 7ec:	71 05       	cpc	r23, r1
- 7ee:	81 05       	cpc	r24, r1
- 7f0:	91 05       	cpc	r25, r1
- 7f2:	3c f4       	brge	.+14     	; 0x802 <main+0x298>
+ 866:	62 33       	cpi	r22, 0x32	; 50
+ 868:	71 05       	cpc	r23, r1
+ 86a:	81 05       	cpc	r24, r1
+ 86c:	91 05       	cpc	r25, r1
+ 86e:	2c f4       	brge	.+10     	; 0x87a <main+0x2e6>
 			leds_zi = (1 << 11) | (1 << 13) | (1 << 6); // overvoltage protection diode short circuit
- 7f4:	20 e4       	ldi	r18, 0x40	; 64
- 7f6:	38 e2       	ldi	r19, 0x28	; 40
- 7f8:	30 93 09 01 	sts	0x0109, r19
- 7fc:	20 93 08 01 	sts	0x0108, r18
- 800:	10 c0       	rjmp	.+32     	; 0x822 <main+0x2b8>
+ 870:	50 92 0d 01 	sts	0x010D, r5
+ 874:	40 92 0c 01 	sts	0x010C, r4
+ 878:	10 c0       	rjmp	.+32     	; 0x89a <main+0x306>
 		} else if(Uin < 600){
- 802:	68 35       	cpi	r22, 0x58	; 88
- 804:	72 40       	sbci	r23, 0x02	; 2
- 806:	81 05       	cpc	r24, r1
- 808:	91 05       	cpc	r25, r1
- 80a:	3c f4       	brge	.+14     	; 0x81a <main+0x2b0>
+ 87a:	68 35       	cpi	r22, 0x58	; 88
+ 87c:	72 40       	sbci	r23, 0x02	; 2
+ 87e:	81 05       	cpc	r24, r1
+ 880:	91 05       	cpc	r25, r1
+ 882:	3c f4       	brge	.+14     	; 0x892 <main+0x2fe>
 			leds_zi = (1 << 10) | (1 << 13) | (1 << 15) | (1 << 6); // overvoltage protection with too low breakdown voltage
- 80c:	40 e4       	ldi	r20, 0x40	; 64
- 80e:	54 ea       	ldi	r21, 0xA4	; 164
- 810:	50 93 09 01 	sts	0x0109, r21
- 814:	40 93 08 01 	sts	0x0108, r20
- 818:	04 c0       	rjmp	.+8      	; 0x822 <main+0x2b8>
+ 884:	40 e4       	ldi	r20, 0x40	; 64
+ 886:	54 ea       	ldi	r21, 0xA4	; 164
+ 888:	50 93 0d 01 	sts	0x010D, r21
+ 88c:	40 93 0c 01 	sts	0x010C, r20
+ 890:	04 c0       	rjmp	.+8      	; 0x89a <main+0x306>
 		} else {
 			leds_zi = 0;
- 81a:	10 92 09 01 	sts	0x0109, r1
- 81e:	10 92 08 01 	sts	0x0108, r1
+ 892:	10 92 0d 01 	sts	0x010D, r1
+ 896:	10 92 0c 01 	sts	0x010C, r1
 		}
 		// gnd z-diode
 		PORTC = (1 << 5);
- 822:	80 e2       	ldi	r24, 0x20	; 32
- 824:	88 b9       	out	0x08, r24	; 8
+ 89a:	80 e2       	ldi	r24, 0x20	; 32
+ 89c:	88 b9       	out	0x08, r24	; 8
 		PORTD = (1 << 2);
- 826:	84 e0       	ldi	r24, 0x04	; 4
- 828:	8b b9       	out	0x0b, r24	; 11
+ 89e:	84 e0       	ldi	r24, 0x04	; 4
+ 8a0:	8b b9       	out	0x0b, r24	; 11
 		for(i=0;i<1;i++) measure_vreg_inp_volt();
- 82a:	31 de       	rcall	.-926    	; 0x48e <_Z21measure_vreg_inp_voltv>
+ 8a2:	0a de       	rcall	.-1004   	; 0x4b8 <_Z21measure_vreg_inp_voltv>
 		Uin = -measure_vreg_inp_volt();
- 82c:	30 de       	rcall	.-928    	; 0x48e <_Z21measure_vreg_inp_voltv>
- 82e:	9b 01       	movw	r18, r22
- 830:	ac 01       	movw	r20, r24
- 832:	88 27       	eor	r24, r24
- 834:	99 27       	eor	r25, r25
- 836:	dc 01       	movw	r26, r24
- 838:	82 1b       	sub	r24, r18
- 83a:	93 0b       	sbc	r25, r19
- 83c:	a4 0b       	sbc	r26, r20
- 83e:	b5 0b       	sbc	r27, r21
+ 8a4:	09 de       	rcall	.-1006   	; 0x4b8 <_Z21measure_vreg_inp_voltv>
+ 8a6:	9b 01       	movw	r18, r22
+ 8a8:	ac 01       	movw	r20, r24
+ 8aa:	88 27       	eor	r24, r24
+ 8ac:	99 27       	eor	r25, r25
+ 8ae:	dc 01       	movw	r26, r24
+ 8b0:	82 1b       	sub	r24, r18
+ 8b2:	93 0b       	sbc	r25, r19
+ 8b4:	a4 0b       	sbc	r26, r20
+ 8b6:	b5 0b       	sbc	r27, r21
 		if(Uin > 870){
- 840:	87 36       	cpi	r24, 0x67	; 103
- 842:	33 e0       	ldi	r19, 0x03	; 3
- 844:	93 07       	cpc	r25, r19
- 846:	a1 05       	cpc	r26, r1
- 848:	b1 05       	cpc	r27, r1
- 84a:	3c f0       	brlt	.+14     	; 0x85a <main+0x2f0>
+ 8b8:	87 36       	cpi	r24, 0x67	; 103
+ 8ba:	33 e0       	ldi	r19, 0x03	; 3
+ 8bc:	93 07       	cpc	r25, r19
+ 8be:	a1 05       	cpc	r26, r1
+ 8c0:	b1 05       	cpc	r27, r1
+ 8c2:	3c f0       	brlt	.+14     	; 0x8d2 <main+0x33e>
 			leds_zg = (1 << 10) | (1 << 13) | (1 << 14) | (1 << 7); // overvoltage protection not working, too high voltage
- 84c:	40 e8       	ldi	r20, 0x80	; 128
- 84e:	54 e6       	ldi	r21, 0x64	; 100
- 850:	50 93 03 01 	sts	0x0103, r21
- 854:	40 93 02 01 	sts	0x0102, r20
- 858:	1c c0       	rjmp	.+56     	; 0x892 <main+0x328>
+ 8c4:	40 e8       	ldi	r20, 0x80	; 128
+ 8c6:	54 e6       	ldi	r21, 0x64	; 100
+ 8c8:	50 93 07 01 	sts	0x0107, r21
+ 8cc:	40 93 06 01 	sts	0x0106, r20
+ 8d0:	1c c0       	rjmp	.+56     	; 0x90a <main+0x376>
 		} else if(Uin < 50) {
- 85a:	82 33       	cpi	r24, 0x32	; 50
- 85c:	91 05       	cpc	r25, r1
- 85e:	a1 05       	cpc	r26, r1
- 860:	b1 05       	cpc	r27, r1
- 862:	3c f4       	brge	.+14     	; 0x872 <main+0x308>
+ 8d2:	82 33       	cpi	r24, 0x32	; 50
+ 8d4:	91 05       	cpc	r25, r1
+ 8d6:	a1 05       	cpc	r26, r1
+ 8d8:	b1 05       	cpc	r27, r1
+ 8da:	3c f4       	brge	.+14     	; 0x8ea <main+0x356>
 			leds_zg = (1 << 11) | (1 << 13) | (1 << 7); // overvoltage protection diode short circuit
- 864:	80 e8       	ldi	r24, 0x80	; 128
- 866:	98 e2       	ldi	r25, 0x28	; 40
- 868:	90 93 03 01 	sts	0x0103, r25
- 86c:	80 93 02 01 	sts	0x0102, r24
- 870:	10 c0       	rjmp	.+32     	; 0x892 <main+0x328>
+ 8dc:	80 e8       	ldi	r24, 0x80	; 128
+ 8de:	98 e2       	ldi	r25, 0x28	; 40
+ 8e0:	90 93 07 01 	sts	0x0107, r25
+ 8e4:	80 93 06 01 	sts	0x0106, r24
+ 8e8:	10 c0       	rjmp	.+32     	; 0x90a <main+0x376>
 		} else if(Uin < 600){
- 872:	88 35       	cpi	r24, 0x58	; 88
- 874:	92 40       	sbci	r25, 0x02	; 2
- 876:	a1 05       	cpc	r26, r1
- 878:	b1 05       	cpc	r27, r1
- 87a:	3c f4       	brge	.+14     	; 0x88a <main+0x320>
+ 8ea:	88 35       	cpi	r24, 0x58	; 88
+ 8ec:	92 40       	sbci	r25, 0x02	; 2
+ 8ee:	a1 05       	cpc	r26, r1
+ 8f0:	b1 05       	cpc	r27, r1
+ 8f2:	3c f4       	brge	.+14     	; 0x902 <main+0x36e>
 			leds_zg = (1 << 10) | (1 << 13) | (1 << 15) | (1 << 7); // overvoltage protection with too low breakdown voltage
- 87c:	40 e8       	ldi	r20, 0x80	; 128
- 87e:	54 ea       	ldi	r21, 0xA4	; 164
- 880:	50 93 03 01 	sts	0x0103, r21
- 884:	40 93 02 01 	sts	0x0102, r20
- 888:	04 c0       	rjmp	.+8      	; 0x892 <main+0x328>
+ 8f4:	40 e8       	ldi	r20, 0x80	; 128
+ 8f6:	54 ea       	ldi	r21, 0xA4	; 164
+ 8f8:	50 93 07 01 	sts	0x0107, r21
+ 8fc:	40 93 06 01 	sts	0x0106, r20
+ 900:	04 c0       	rjmp	.+8      	; 0x90a <main+0x376>
 		} else {
 			leds_zg = 0;
- 88a:	10 92 03 01 	sts	0x0103, r1
- 88e:	10 92 02 01 	sts	0x0102, r1
+ 902:	10 92 07 01 	sts	0x0107, r1
+ 906:	10 92 06 01 	sts	0x0106, r1
 		}
 		// output to input z-diode
 		PORTC = (1 << 5);
- 892:	80 e2       	ldi	r24, 0x20	; 32
- 894:	88 b9       	out	0x08, r24	; 8
+ 90a:	80 e2       	ldi	r24, 0x20	; 32
+ 90c:	88 b9       	out	0x08, r24	; 8
 		PORTD = (1 << 4);		
- 896:	80 e1       	ldi	r24, 0x10	; 16
- 898:	8b b9       	out	0x0b, r24	; 11
+ 90e:	80 e1       	ldi	r24, 0x10	; 16
+ 910:	8b b9       	out	0x0b, r24	; 11
 		measure_vreg_inout_volt();
- 89a:	2b de       	rcall	.-938    	; 0x4f2 <_Z23measure_vreg_inout_voltv>
+ 912:	04 de       	rcall	.-1016   	; 0x51c <_Z23measure_vreg_inout_voltv>
 		Uinout = -measure_vreg_inout_volt();
- 89c:	2a de       	rcall	.-940    	; 0x4f2 <_Z23measure_vreg_inout_voltv>
- 89e:	9b 01       	movw	r18, r22
- 8a0:	ac 01       	movw	r20, r24
- 8a2:	88 27       	eor	r24, r24
- 8a4:	99 27       	eor	r25, r25
- 8a6:	dc 01       	movw	r26, r24
- 8a8:	82 1b       	sub	r24, r18
- 8aa:	93 0b       	sbc	r25, r19
- 8ac:	a4 0b       	sbc	r26, r20
- 8ae:	b5 0b       	sbc	r27, r21
+ 914:	03 de       	rcall	.-1018   	; 0x51c <_Z23measure_vreg_inout_voltv>
+ 916:	9b 01       	movw	r18, r22
+ 918:	ac 01       	movw	r20, r24
+ 91a:	88 27       	eor	r24, r24
+ 91c:	99 27       	eor	r25, r25
+ 91e:	dc 01       	movw	r26, r24
+ 920:	82 1b       	sub	r24, r18
+ 922:	93 0b       	sbc	r25, r19
+ 924:	a4 0b       	sbc	r26, r20
+ 926:	b5 0b       	sbc	r27, r21
 		if(Uinout > 870){
- 8b0:	87 36       	cpi	r24, 0x67	; 103
- 8b2:	33 e0       	ldi	r19, 0x03	; 3
- 8b4:	93 07       	cpc	r25, r19
- 8b6:	a1 05       	cpc	r26, r1
- 8b8:	b1 05       	cpc	r27, r1
- 8ba:	3c f0       	brlt	.+14     	; 0x8ca <main+0x360>
+ 928:	87 36       	cpi	r24, 0x67	; 103
+ 92a:	33 e0       	ldi	r19, 0x03	; 3
+ 92c:	93 07       	cpc	r25, r19
+ 92e:	a1 05       	cpc	r26, r1
+ 930:	b1 05       	cpc	r27, r1
+ 932:	3c f0       	brlt	.+14     	; 0x942 <main+0x3ae>
 			leds_zio = (1 << 10) | (1 << 13) | (1 << 14) | (1 << 6) | (1 << 8); // overvoltage protection not working, too high voltage
- 8bc:	40 e4       	ldi	r20, 0x40	; 64
- 8be:	55 e6       	ldi	r21, 0x65	; 101
- 8c0:	50 93 05 01 	sts	0x0105, r21
- 8c4:	40 93 04 01 	sts	0x0104, r20
- 8c8:	1a c0       	rjmp	.+52     	; 0x8fe <main+0x394>
+ 934:	40 e4       	ldi	r20, 0x40	; 64
+ 936:	55 e6       	ldi	r21, 0x65	; 101
+ 938:	50 93 09 01 	sts	0x0109, r21
+ 93c:	40 93 08 01 	sts	0x0108, r20
+ 940:	1c c0       	rjmp	.+56     	; 0x97a <main+0x3e6>
 		} else if(Uinout < 50) {
- 8ca:	82 33       	cpi	r24, 0x32	; 50
- 8cc:	91 05       	cpc	r25, r1
- 8ce:	a1 05       	cpc	r26, r1
- 8d0:	b1 05       	cpc	r27, r1
- 8d2:	3c f4       	brge	.+14     	; 0x8e2 <main+0x378>
+ 942:	82 33       	cpi	r24, 0x32	; 50
+ 944:	91 05       	cpc	r25, r1
+ 946:	a1 05       	cpc	r26, r1
+ 948:	b1 05       	cpc	r27, r1
+ 94a:	3c f4       	brge	.+14     	; 0x95a <main+0x3c6>
 			leds_zio = (1 << 11) | (1 << 13) | (1 << 6) | (1 << 8); // overvoltage protection diode short circuit
- 8d4:	80 e4       	ldi	r24, 0x40	; 64
- 8d6:	99 e2       	ldi	r25, 0x29	; 41
- 8d8:	90 93 05 01 	sts	0x0105, r25
- 8dc:	80 93 04 01 	sts	0x0104, r24
- 8e0:	0e c0       	rjmp	.+28     	; 0x8fe <main+0x394>
+ 94c:	80 e4       	ldi	r24, 0x40	; 64
+ 94e:	99 e2       	ldi	r25, 0x29	; 41
+ 950:	90 93 09 01 	sts	0x0109, r25
+ 954:	80 93 08 01 	sts	0x0108, r24
+ 958:	10 c0       	rjmp	.+32     	; 0x97a <main+0x3e6>
 		} else if(Uinout < 600){
- 8e2:	88 35       	cpi	r24, 0x58	; 88
- 8e4:	92 40       	sbci	r25, 0x02	; 2
- 8e6:	a1 05       	cpc	r26, r1
- 8e8:	b1 05       	cpc	r27, r1
- 8ea:	2c f4       	brge	.+10     	; 0x8f6 <main+0x38c>
+ 95a:	88 35       	cpi	r24, 0x58	; 88
+ 95c:	92 40       	sbci	r25, 0x02	; 2
+ 95e:	a1 05       	cpc	r26, r1
+ 960:	b1 05       	cpc	r27, r1
+ 962:	3c f4       	brge	.+14     	; 0x972 <main+0x3de>
 			leds_zio = (1 << 10) | (1 << 13) | (1 << 15) | (1 << 6) | (1 << 8); // overvoltage protection with too low breakdown voltage
- 8ec:	10 93 05 01 	sts	0x0105, r17
- 8f0:	00 93 04 01 	sts	0x0104, r16
- 8f4:	04 c0       	rjmp	.+8      	; 0x8fe <main+0x394>
+ 964:	40 e4       	ldi	r20, 0x40	; 64
+ 966:	55 ea       	ldi	r21, 0xA5	; 165
+ 968:	50 93 09 01 	sts	0x0109, r21
+ 96c:	40 93 08 01 	sts	0x0108, r20
+ 970:	04 c0       	rjmp	.+8      	; 0x97a <main+0x3e6>
 		} else {
 			leds_zio = 0;
- 8f6:	10 92 05 01 	sts	0x0105, r1
- 8fa:	10 92 04 01 	sts	0x0104, r1
-	OCR0A = 70 * 200000/Ucc +132;
+ 972:	10 92 09 01 	sts	0x0109, r1
+ 976:	10 92 08 01 	sts	0x0108, r1
+	OCR0A = 10 * 200000/Ucc +20;
 }
 
 void stop_step_up(void)
 {
 	OCR0A = 0;
- 8fe:	17 bc       	out	0x27, r1	; 39
-		//if(leds_z) leds = leds_z;
-		stop_step_up();
-
-		//leds_tmp |= leds_capi | leds_capo | leds_zi;
-		//leds = Co;
-		if(!(leds_tmp & (1 << 13))){
- 900:	80 91 0e 01 	lds	r24, 0x010E
- 904:	90 91 0f 01 	lds	r25, 0x010F
- 908:	95 fd       	sbrc	r25, 5
- 90a:	64 ce       	rjmp	.-824    	; 0x5d4 <main+0x6a>
-			leds_tmp |= (1 << 12);
- 90c:	90 61       	ori	r25, 0x10	; 16
- 90e:	90 93 0f 01 	sts	0x010F, r25
- 912:	80 93 0e 01 	sts	0x010E, r24
- 916:	5e ce       	rjmp	.-836    	; 0x5d4 <main+0x6a>
+ 97a:	17 bc       	out	0x27, r1	; 39
+ 97c:	43 ce       	rjmp	.-890    	; 0x604 <main+0x70>
 		// check output voltage
 		PORTC = 0;
 		PORTD = 1 + 8;
 		measure_vreg_outp_volt(); // dummy read/wait
 		Uout = measure_vreg_outp_volt();
 		leds_v = ADC2LED(Uout);
- 918:	90 93 01 01 	sts	0x0101, r25
- 91c:	80 93 00 01 	sts	0x0100, r24
+ 97e:	90 93 05 01 	sts	0x0105, r25
+ 982:	80 93 04 01 	sts	0x0104, r24
 {
 	OCR0A = 0;
 }
 
 int main(void)
 {
- 920:	c6 2d       	mov	r28, r6
- 922:	d7 2d       	mov	r29, r7
- 924:	c8 2c       	mov	r12, r8
- 926:	d9 2c       	mov	r13, r9
- 928:	ea 2c       	mov	r14, r10
- 92a:	fb 2c       	mov	r15, r11
- 92c:	7b ce       	rjmp	.-778    	; 0x624 <main+0xba>
+ 986:	c8 2d       	mov	r28, r8
+ 988:	d9 2d       	mov	r29, r9
+ 98a:	ca 2c       	mov	r12, r10
+ 98c:	db 2c       	mov	r13, r11
+ 98e:	e0 2e       	mov	r14, r16
+ 990:	f1 2e       	mov	r15, r17
+ 992:	60 ce       	rjmp	.-832    	; 0x654 <main+0xc0>
 
-0000092e <__divmodsi4>:
- 92e:	05 2e       	mov	r0, r21
- 930:	97 fb       	bst	r25, 7
- 932:	16 f4       	brtc	.+4      	; 0x938 <__divmodsi4+0xa>
- 934:	00 94       	com	r0
- 936:	0f d0       	rcall	.+30     	; 0x956 <__negsi2>
- 938:	57 fd       	sbrc	r21, 7
- 93a:	05 d0       	rcall	.+10     	; 0x946 <__divmodsi4_neg2>
- 93c:	1e d0       	rcall	.+60     	; 0x97a <__udivmodsi4>
- 93e:	07 fc       	sbrc	r0, 7
- 940:	02 d0       	rcall	.+4      	; 0x946 <__divmodsi4_neg2>
- 942:	46 f4       	brtc	.+16     	; 0x954 <__divmodsi4_exit>
- 944:	08 c0       	rjmp	.+16     	; 0x956 <__negsi2>
+00000994 <__divmodsi4>:
+ 994:	05 2e       	mov	r0, r21
+ 996:	97 fb       	bst	r25, 7
+ 998:	16 f4       	brtc	.+4      	; 0x99e <__divmodsi4+0xa>
+ 99a:	00 94       	com	r0
+ 99c:	0f d0       	rcall	.+30     	; 0x9bc <__negsi2>
+ 99e:	57 fd       	sbrc	r21, 7
+ 9a0:	05 d0       	rcall	.+10     	; 0x9ac <__divmodsi4_neg2>
+ 9a2:	1e d0       	rcall	.+60     	; 0x9e0 <__udivmodsi4>
+ 9a4:	07 fc       	sbrc	r0, 7
+ 9a6:	02 d0       	rcall	.+4      	; 0x9ac <__divmodsi4_neg2>
+ 9a8:	46 f4       	brtc	.+16     	; 0x9ba <__divmodsi4_exit>
+ 9aa:	08 c0       	rjmp	.+16     	; 0x9bc <__negsi2>
 
-00000946 <__divmodsi4_neg2>:
- 946:	50 95       	com	r21
- 948:	40 95       	com	r20
- 94a:	30 95       	com	r19
- 94c:	21 95       	neg	r18
- 94e:	3f 4f       	sbci	r19, 0xFF	; 255
- 950:	4f 4f       	sbci	r20, 0xFF	; 255
- 952:	5f 4f       	sbci	r21, 0xFF	; 255
+000009ac <__divmodsi4_neg2>:
+ 9ac:	50 95       	com	r21
+ 9ae:	40 95       	com	r20
+ 9b0:	30 95       	com	r19
+ 9b2:	21 95       	neg	r18
+ 9b4:	3f 4f       	sbci	r19, 0xFF	; 255
+ 9b6:	4f 4f       	sbci	r20, 0xFF	; 255
+ 9b8:	5f 4f       	sbci	r21, 0xFF	; 255
 
-00000954 <__divmodsi4_exit>:
- 954:	08 95       	ret
+000009ba <__divmodsi4_exit>:
+ 9ba:	08 95       	ret
 
-00000956 <__negsi2>:
- 956:	90 95       	com	r25
- 958:	80 95       	com	r24
- 95a:	70 95       	com	r23
- 95c:	61 95       	neg	r22
- 95e:	7f 4f       	sbci	r23, 0xFF	; 255
- 960:	8f 4f       	sbci	r24, 0xFF	; 255
- 962:	9f 4f       	sbci	r25, 0xFF	; 255
- 964:	08 95       	ret
+000009bc <__negsi2>:
+ 9bc:	90 95       	com	r25
+ 9be:	80 95       	com	r24
+ 9c0:	70 95       	com	r23
+ 9c2:	61 95       	neg	r22
+ 9c4:	7f 4f       	sbci	r23, 0xFF	; 255
+ 9c6:	8f 4f       	sbci	r24, 0xFF	; 255
+ 9c8:	9f 4f       	sbci	r25, 0xFF	; 255
+ 9ca:	08 95       	ret
 
-00000966 <__muluhisi3>:
- 966:	2b d0       	rcall	.+86     	; 0x9be <__umulhisi3>
- 968:	a5 9f       	mul	r26, r21
- 96a:	90 0d       	add	r25, r0
- 96c:	b4 9f       	mul	r27, r20
- 96e:	90 0d       	add	r25, r0
- 970:	a4 9f       	mul	r26, r20
- 972:	80 0d       	add	r24, r0
- 974:	91 1d       	adc	r25, r1
- 976:	11 24       	eor	r1, r1
- 978:	08 95       	ret
+000009cc <__muluhisi3>:
+ 9cc:	2b d0       	rcall	.+86     	; 0xa24 <__umulhisi3>
+ 9ce:	a5 9f       	mul	r26, r21
+ 9d0:	90 0d       	add	r25, r0
+ 9d2:	b4 9f       	mul	r27, r20
+ 9d4:	90 0d       	add	r25, r0
+ 9d6:	a4 9f       	mul	r26, r20
+ 9d8:	80 0d       	add	r24, r0
+ 9da:	91 1d       	adc	r25, r1
+ 9dc:	11 24       	eor	r1, r1
+ 9de:	08 95       	ret
 
-0000097a <__udivmodsi4>:
- 97a:	a1 e2       	ldi	r26, 0x21	; 33
- 97c:	1a 2e       	mov	r1, r26
- 97e:	aa 1b       	sub	r26, r26
- 980:	bb 1b       	sub	r27, r27
- 982:	fd 01       	movw	r30, r26
- 984:	0d c0       	rjmp	.+26     	; 0x9a0 <__udivmodsi4_ep>
+000009e0 <__udivmodsi4>:
+ 9e0:	a1 e2       	ldi	r26, 0x21	; 33
+ 9e2:	1a 2e       	mov	r1, r26
+ 9e4:	aa 1b       	sub	r26, r26
+ 9e6:	bb 1b       	sub	r27, r27
+ 9e8:	fd 01       	movw	r30, r26
+ 9ea:	0d c0       	rjmp	.+26     	; 0xa06 <__udivmodsi4_ep>
 
-00000986 <__udivmodsi4_loop>:
- 986:	aa 1f       	adc	r26, r26
- 988:	bb 1f       	adc	r27, r27
- 98a:	ee 1f       	adc	r30, r30
- 98c:	ff 1f       	adc	r31, r31
- 98e:	a2 17       	cp	r26, r18
- 990:	b3 07       	cpc	r27, r19
- 992:	e4 07       	cpc	r30, r20
- 994:	f5 07       	cpc	r31, r21
- 996:	20 f0       	brcs	.+8      	; 0x9a0 <__udivmodsi4_ep>
- 998:	a2 1b       	sub	r26, r18
- 99a:	b3 0b       	sbc	r27, r19
- 99c:	e4 0b       	sbc	r30, r20
- 99e:	f5 0b       	sbc	r31, r21
+000009ec <__udivmodsi4_loop>:
+ 9ec:	aa 1f       	adc	r26, r26
+ 9ee:	bb 1f       	adc	r27, r27
+ 9f0:	ee 1f       	adc	r30, r30
+ 9f2:	ff 1f       	adc	r31, r31
+ 9f4:	a2 17       	cp	r26, r18
+ 9f6:	b3 07       	cpc	r27, r19
+ 9f8:	e4 07       	cpc	r30, r20
+ 9fa:	f5 07       	cpc	r31, r21
+ 9fc:	20 f0       	brcs	.+8      	; 0xa06 <__udivmodsi4_ep>
+ 9fe:	a2 1b       	sub	r26, r18
+ a00:	b3 0b       	sbc	r27, r19
+ a02:	e4 0b       	sbc	r30, r20
+ a04:	f5 0b       	sbc	r31, r21
 
-000009a0 <__udivmodsi4_ep>:
- 9a0:	66 1f       	adc	r22, r22
- 9a2:	77 1f       	adc	r23, r23
- 9a4:	88 1f       	adc	r24, r24
- 9a6:	99 1f       	adc	r25, r25
- 9a8:	1a 94       	dec	r1
- 9aa:	69 f7       	brne	.-38     	; 0x986 <__udivmodsi4_loop>
- 9ac:	60 95       	com	r22
- 9ae:	70 95       	com	r23
- 9b0:	80 95       	com	r24
- 9b2:	90 95       	com	r25
- 9b4:	9b 01       	movw	r18, r22
- 9b6:	ac 01       	movw	r20, r24
- 9b8:	bd 01       	movw	r22, r26
- 9ba:	cf 01       	movw	r24, r30
- 9bc:	08 95       	ret
+00000a06 <__udivmodsi4_ep>:
+ a06:	66 1f       	adc	r22, r22
+ a08:	77 1f       	adc	r23, r23
+ a0a:	88 1f       	adc	r24, r24
+ a0c:	99 1f       	adc	r25, r25
+ a0e:	1a 94       	dec	r1
+ a10:	69 f7       	brne	.-38     	; 0x9ec <__udivmodsi4_loop>
+ a12:	60 95       	com	r22
+ a14:	70 95       	com	r23
+ a16:	80 95       	com	r24
+ a18:	90 95       	com	r25
+ a1a:	9b 01       	movw	r18, r22
+ a1c:	ac 01       	movw	r20, r24
+ a1e:	bd 01       	movw	r22, r26
+ a20:	cf 01       	movw	r24, r30
+ a22:	08 95       	ret
 
-000009be <__umulhisi3>:
- 9be:	a2 9f       	mul	r26, r18
- 9c0:	b0 01       	movw	r22, r0
- 9c2:	b3 9f       	mul	r27, r19
- 9c4:	c0 01       	movw	r24, r0
- 9c6:	a3 9f       	mul	r26, r19
- 9c8:	01 d0       	rcall	.+2      	; 0x9cc <__umulhisi3+0xe>
- 9ca:	b2 9f       	mul	r27, r18
- 9cc:	70 0d       	add	r23, r0
- 9ce:	81 1d       	adc	r24, r1
- 9d0:	11 24       	eor	r1, r1
- 9d2:	91 1d       	adc	r25, r1
- 9d4:	08 95       	ret
+00000a24 <__umulhisi3>:
+ a24:	a2 9f       	mul	r26, r18
+ a26:	b0 01       	movw	r22, r0
+ a28:	b3 9f       	mul	r27, r19
+ a2a:	c0 01       	movw	r24, r0
+ a2c:	a3 9f       	mul	r26, r19
+ a2e:	01 d0       	rcall	.+2      	; 0xa32 <__umulhisi3+0xe>
+ a30:	b2 9f       	mul	r27, r18
+ a32:	70 0d       	add	r23, r0
+ a34:	81 1d       	adc	r24, r1
+ a36:	11 24       	eor	r1, r1
+ a38:	91 1d       	adc	r25, r1
+ a3a:	08 95       	ret
 
-000009d6 <_exit>:
- 9d6:	f8 94       	cli
+00000a3c <_exit>:
+ a3c:	f8 94       	cli
 
-000009d8 <__stop_program>:
- 9d8:	ff cf       	rjmp	.-2      	; 0x9d8 <__stop_program>
+00000a3e <__stop_program>:
+ a3e:	ff cf       	rjmp	.-2      	; 0xa3e <__stop_program>

@@ -14,7 +14,7 @@ uint16_t leds;
 uint8_t led_row;
 uint32_t x;
 
-uint16_t leds_tmp, leds_capi, leds_capo, leds_zi, leds_zo, leds_zio, leds_zg, leds_v;
+uint16_t leds_tmp, leds_capi, leds_capo, leds_zi, leds_zo, leds_zio, leds_zg, leds_v, leds_brd, leds_brd_su, leds_oc;
 
 uint8_t ADC2LED(int16_t adc)
 {
@@ -105,18 +105,19 @@ ISR (TIMER0_OVF_vect)
 		DDRB = 128 | mask;	
 		
 		x++;
-		
-		if(0 == ((x >> 12) & 7)) if(leds_capi) leds = leds_capi;
-		if(1 == ((x >> 12) & 7)) if(leds_zi) leds = leds_zi;
-		if(2 == ((x >> 12) & 7)) if(leds_zg) leds = leds_zg;
-		if(3 == ((x >> 12) & 7)) if(leds_capo) leds = leds_capo;
-		if(4 == ((x >> 12) & 7)) if(leds_zo) leds = leds_zo;
-		if(5 == ((x >> 12) & 7)) if(leds_zio) leds = leds_zio;
-
-		leds_tmp = leds_capi | leds_capo | leds_zi | leds_zo | leds_zio | leds_zg | leds_v;
-		if(!(leds_tmp & (1 << 13))) leds = leds_tmp |= (1 << 12);
-		if(6 == ((x >> 13) & 7)) if(leds_tmp) leds = leds_tmp;
-		
+		if(leds_brd | leds_brd_su) leds = leds_brd | leds_brd_su;
+		else{
+			if(0 == ((x >> 12) & 7)) if(leds_capi) leds = leds_capi;
+			if(1 == ((x >> 12) & 7)) if(leds_zi) leds = leds_zi;
+			if(2 == ((x >> 12) & 7)) if(leds_zg) leds = leds_zg;
+			if(3 == ((x >> 12) & 7)) if(leds_capo) leds = leds_capo;
+			if(4 == ((x >> 12) & 7)) if(leds_zo) leds = leds_zo;
+			if(5 == ((x >> 12) & 7)) if(leds_zio) leds = leds_zio;
+			//if(6 == ((x >> 12) & 7)) if(leds_oc) leds = leds_oc;
+			leds_tmp = leds_capi | leds_capo | leds_zi | leds_zo | leds_zio | leds_zg | leds_v;// | leds_oc;
+			if(!(leds_tmp & (1 << 13))) leds = leds_tmp |= (1 << 12);
+			if(6 == ((x >> 13) & 7)) if(leds_tmp) leds = leds_tmp;
+		}
 		
 	}
 	led_row++;
@@ -213,6 +214,11 @@ void start_step_up(int32_t Ucc)
 	OCR0A = 70 * 200000/Ucc +132;
 }
 
+void start_step_up_low(int32_t Ucc)
+{
+	OCR0A = 10 * 200000/Ucc +20;
+}
+
 void stop_step_up(void)
 {
 	OCR0A = 0;
@@ -221,7 +227,7 @@ void stop_step_up(void)
 int main(void)
 {
 
-	int32_t Uout, Ci, Co, Ucc, Uin, Uinout;
+	int32_t Uout, Ci, Co, Ucc, Ustepup, Uin, Uinout;
 	int16_t i, k;
 
 	DDRD = 255;
@@ -276,13 +282,15 @@ int main(void)
 			Ucc += ADC_blocking_in(0);
 		}
 		if(Ucc < 200000){
-			leds_tmp |= (1 << 13) | (1 << 15);
-			leds = leds_tmp;
+			leds_brd = (1 << 13) | (1 << 15);
+			leds = leds_brd;
 			continue;
 		} else if(Ucc > 250000){
-			leds_tmp |= (1 << 13) | (1 << 14);
-			leds = leds_tmp;
+			leds_brd = (1 << 13) | (1 << 14);
+			leds = leds_brd;
 			continue;
+		} else {
+			leds_brd = 0;
 		}
 		
 		// capacity measurement
@@ -319,6 +327,19 @@ int main(void)
 		PORTC = 0;
 		start_step_up(Ucc);
 		for(i=0;i<10000;i++);
+		// check stepup
+		Ustepup = 0;
+		k = 1000;
+		for(i=0;i<k;i++){
+			Ustepup += ADC_blocking_in(0);
+		}
+		Ustepup /= k;
+		if(Ustepup < 910){
+			leds_brd_su = (1 << 13);
+			leds = leds_brd_su;
+		}else{
+			leds_brd_su = 0;
+		}
 		// output z-diode
 		PORTD = (1 << 4) | (1 << 3);
 		for(i=0;i<1;i++) measure_vreg_outp_volt();
@@ -375,16 +396,25 @@ int main(void)
 			leds_zio = 0;
 		}
 		//if(leds_z) leds = leds_z;
+		
+		/*
+		// check regulator overcurrent protection
+		start_step_up_low(Ucc);
+		PORTC = 0;
+		PORTD = (1 << 3) | (1 << 5) | (1 << 7);
+		for(i=0;i<1;i++) measure_vreg_inp_volt();
+		Uin = measure_vreg_inp_volt();
+				
+		if(Uin < 100){
+			leds_oc = (1 << 8) | (1 << 13) | (1 << 14) | (1 << 6);
+		} else {
+			leds_oc = 0;
+		}
+		*/
 		stop_step_up();
 
-		//leds_tmp |= leds_capi | leds_capo | leds_zi;
-		//leds = Co;
-		if(!(leds_tmp & (1 << 13))){
-			leds_tmp |= (1 << 12);
-		}
+	
 		
-		//leds = leds_tmp;
-		
-        //TODO:: Please write your application code 
+       
     }
 }

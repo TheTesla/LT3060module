@@ -1,0 +1,36 @@
+How to test the LT3060board?
+----------------------------
+
+The voltage regulator board integrates capacitors for on input, output and reference. It also has some TVS diodes. All the components should be tested after production.
+
+The test board for the LT3060board is used to test the LT3060 it self, the input and output capacitors and all TVS diodes automatically. To test the LT3060board:
+
+1. Power up the test board with a 12 V power adaptor. 300 mA may be needed.
+
+2. Plug in the LT3060board like shown on the test board.
+
+3. Wait at least 6 seconds.
+ 
+4. The 6 upper green leds show the output voltage. It should be the same as printed on the LT3060 board. Also the green OK led should light up. All other leds should be dark. Everything is OK, go to step 2 with the next LT3060board.
+
+If something was wrong:
+
+- problems with the test board: (red ERR led is on on all errors)
+	* The red 2H led are on, no other red led is on.						- Power supply voltage is too high.
+	* The red 2L led are on, no other red led is on.						- Power supply voltage is too low.
+	* Only the red ERR led is on.											- Step up circuit failed. 
+
+- problems with the LT3060board: (red ERR led is on on all errors)
+	* The red CAP led is on.												- Problem with capacitor.
+	  The "in" and "out" leds show on which side of the regulator the problem exists. The leds 2H and 2L mean capacity is too high or too low. (large tolerance, 50 %)
+	* The red OPEN/Z led is on.												- TVS diode is open circuit, has more than 45 V break down voltage or the break down voltage is much too low.
+	  The red led 2L means much too low TVS break down voltage. (<30 V)
+	  The red led 2H means too high break down voltage or open circuit.
+	  The red leds "in", "gnd" and "out" show which diode failed.
+	  The input and output diodes are tested against gnd but the gnd diode is tested against the input. To see short circuit or unwanted current over the regulator between output and input, there is a forth check of the output to input.
+	* The red "short" led is on. 											- Means very low TVS diode break down voltage. (<2.5 V) This may happen if a cap fails short or the voltage regulator fails or is soldered bad.
+	* The red 2H or 2L led and the "out" led is on. 						- Output voltage of the regulator is too high (>7.5 V) or too low. (<0.5 V)
+
+	If the red leds are blinking, more than one error occurred. The errors are shown in separate time slots and later all together.
+	
+WARNING: You should not touch live parts on the LT3060booard or the test board. The automatic TVS diode test is applying 50 V to the DUT. 
